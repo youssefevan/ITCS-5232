@@ -7,9 +7,15 @@
 radius = 4.0
 
 [node name="Player" type="Area2D"]
-position = Vector2(76, 32)
+collision_layer = 2
 script = ExtResource("1_rpg5j")
 metadata/_edit_group_ = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(4, 4)
+texture = ExtResource("2_krjxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 8)
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(4, 4)
@@ -18,9 +24,3 @@ shape = SubResource("CircleShape2D_jv4ov")
 [node name="PhysicsRay" type="RayCast2D" parent="."]
 position = Vector2(4, 4)
 target_position = Vector2(0, 8)
-
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(4, 4)
-texture = ExtResource("2_krjxa")
-region_enabled = true
-region_rect = Rect2(0, 0, 8, 8)
