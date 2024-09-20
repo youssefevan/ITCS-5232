@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://blk6e2hwep16e"]
+
+[ext_resource type="Script" path="res://scripts/attack.gd" id="1_5hlyf"]
+[ext_resource type="Texture2D" uid="uid://pflr6dfh4e1f" path="res://sprites/sprite.png" id="1_wxhqa"]
+[ext_resource type="Shader" path="res://shaders/recolor.gdshader" id="2_gg2wc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbkhq"]
+shader = ExtResource("2_gg2wc")
+shader_parameter/inputColor = Vector4(0, 0, 0, 0)
+shader_parameter/transparentBG = null
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k52rg"]
+atlas = ExtResource("1_wxhqa")
+region = Rect2(24, 56, 8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ae0gy"]
+radius = 4.0
+
+[node name="Attack" type="Area2D"]
+collision_layer = 16
+collision_mask = 32
+script = ExtResource("1_5hlyf")
+color = Color(1, 0, 0, 1)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_jbkhq")
+texture = SubResource("AtlasTexture_k52rg")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ae0gy")

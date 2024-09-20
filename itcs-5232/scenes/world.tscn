@@ -29,99 +29,96 @@ offset_right = 512.0
 offset_bottom = 576.0
 theme = ExtResource("2_5brb3")
 
+[node name="ActionsRemaining" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 456.0
+offset_bottom = 216.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Line" type="Label" parent="Menu/ActionsRemaining"]
+layout_mode = 2
+text = "------------------"
+
+[node name="ActionsRemaining" type="Label" parent="Menu/ActionsRemaining"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Actions Remaining:"
+
+[node name="ActionsBar" type="Label" parent="Menu/ActionsRemaining"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "|#########-------|"
+
+[node name="Line2" type="Label" parent="Menu/ActionsRemaining"]
+layout_mode = 2
+text = "------------------"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Menu"]
 layout_mode = 2
 offset_left = 64.0
-offset_top = 64.0
-offset_right = 448.0
-offset_bottom = 592.0
+offset_top = 208.0
+offset_right = 456.0
+offset_bottom = 640.0
 
-[node name="Buttons" type="VBoxContainer" parent="Menu/ScrollContainer"]
+[node name="Inventory" type="VBoxContainer" parent="Menu/ScrollContainer"]
 layout_mode = 2
 
-[node name="Attack" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Title" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Attack"
-flat = true
+text = "Inventory"
 
-[node name="Inventory" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory2" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item2" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory3" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item3" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory4" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item4" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory5" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item5" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory6" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item6" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory7" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item7" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory8" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item8" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory9" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item9" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory10" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item10" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
-[node name="Inventory11" type="Button" parent="Menu/ScrollContainer/Buttons"]
+[node name="Item11" type="Label" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
-
-[node name="Inventory12" type="Button" parent="Menu/ScrollContainer/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "> Inventory"
-flat = true
+text = "> Item 1"
 
 [node name="HUD" type="Control" parent="."]
 anchors_preset = 0
-offset_top = 576.0
+offset_top = 624.0
 offset_right = 512.0
-offset_bottom = 1152.0
+offset_bottom = 1120.0
 theme = ExtResource("2_5brb3")
 
 [node name="Stats" type="VBoxContainer" parent="HUD"]
@@ -134,10 +131,6 @@ offset_bottom = 256.0
 layout_mode = 2
 text = "------------------"
 
-[node name="Actions" type="Label" parent="HUD/Stats"]
-layout_mode = 2
-text = "Actions: 4"
-
 [node name="Coins" type="Label" parent="HUD/Stats"]
 layout_mode = 2
 text = "Coins: 102"
@@ -148,21 +141,67 @@ text = "Health: |#####---|"
 
 [node name="XP" type="Label" parent="HUD/Stats"]
 layout_mode = 2
-text = "XP: |###---------|"
+text = "Speed:  |###-----|"
+
+[node name="Line2" type="Label" parent="HUD/Stats"]
+z_index = 1
+layout_mode = 2
+text = "------------------"
 
 [node name="MinimapRender" type="SubViewportContainer" parent="HUD"]
 layout_mode = 2
 offset_left = 128.0
-offset_top = 256.0
+offset_top = 208.0
 offset_right = 384.0
-offset_bottom = 512.0
+offset_bottom = 480.0
 size_flags_vertical = 3
 stretch = true
 stretch_shrink = 4
 
 [node name="SubViewport" type="SubViewport" parent="HUD/MinimapRender"]
 handle_input_locally = false
-size = Vector2i(64, 64)
+size = Vector2i(64, 68)
 render_target_update_mode = 4
 
 [node name="Minimap" parent="HUD/MinimapRender/SubViewport" instance=ExtResource("3_civkx")]
+
+[node name="Line3" type="Label" parent="HUD"]
+z_index = 1
+layout_mode = 2
+offset_left = 64.0
+offset_top = 235.0
+offset_right = 86.0
+offset_bottom = 462.0
+text = "|
+|
+|
+|
+|"
+
+[node name="Line4" type="Label" parent="HUD"]
+z_index = 1
+layout_mode = 2
+offset_left = 432.0
+offset_top = 235.0
+offset_right = 454.0
+offset_bottom = 462.0
+text = "|
+|
+|
+|
+|"
+
+[node name="Line" type="Label" parent="HUD"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -43.0
+offset_right = 195.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "------------------"
