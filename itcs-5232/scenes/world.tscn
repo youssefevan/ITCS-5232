@@ -1,59 +1,168 @@
-[gd_scene load_steps=12 format=4 uid="uid://macpb23f3d27"]
+[gd_scene load_steps=4 format=3 uid="uid://macpb23f3d27"]
 
-[ext_resource type="PackedScene" uid="uid://doe7qpfdwxevf" path="res://scenes/player.tscn" id="1_s85bf"]
-[ext_resource type="Texture2D" uid="uid://pflr6dfh4e1f" path="res://sprites/sprite.png" id="2_1aoyo"]
-[ext_resource type="PackedScene" uid="uid://wb6y15mcmjxk" path="res://scenes/enemy.tscn" id="2_ufrch"]
-[ext_resource type="PackedScene" uid="uid://cht6byjuqlgbc" path="res://scenes/item.tscn" id="3_n5pnq"]
+[ext_resource type="PackedScene" uid="uid://ccye5cat0b1ls" path="res://scenes/game.tscn" id="1_3gbxe"]
+[ext_resource type="Theme" uid="uid://kxvob6pjb2o6" path="res://themes/gui.tres" id="2_5brb3"]
+[ext_resource type="PackedScene" uid="uid://yi0y3rwgye6t" path="res://scenes/minimap.tscn" id="3_civkx"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bom4w"]
-texture = ExtResource("2_1aoyo")
-texture_region_size = Vector2i(8, 8)
-6:7/0 = 0
-5:7/0 = 0
+[node name="World" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 
-[sub_resource type="TileSet" id="TileSet_u10ov"]
-tile_size = Vector2i(8, 8)
-sources/0 = SubResource("TileSetAtlasSource_bom4w")
+[node name="GameRender" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 512.0
+offset_right = 2048.0
+offset_bottom = 1152.0
+metadata/_edit_group_ = true
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yja2n"]
-texture = ExtResource("2_1aoyo")
-texture_region_size = Vector2i(8, 8)
-0:0/0 = 0
-7:7/0 = 0
-7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+[node name="SubViewport" type="SubViewport" parent="GameRender"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(1536, 1152)
+render_target_update_mode = 4
 
-[sub_resource type="TileSet" id="TileSet_4fpm3"]
-tile_size = Vector2i(8, 8)
-physics_layer_0/collision_layer = 1
-physics_layer_0/collision_mask = 7
-sources/0 = SubResource("TileSetAtlasSource_yja2n")
+[node name="Game" parent="GameRender/SubViewport" instance=ExtResource("1_3gbxe")]
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5v0kt"]
-resource_name = "Enemies"
-scenes/1/scene = ExtResource("2_ufrch")
+[node name="Menu" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 576.0
+theme = ExtResource("2_5brb3")
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_h0p6i"]
-resource_name = "Items"
-scenes/1/scene = ExtResource("3_n5pnq")
+[node name="ScrollContainer" type="ScrollContainer" parent="Menu"]
+layout_mode = 2
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 592.0
 
-[sub_resource type="TileSet" id="TileSet_xmu0n"]
-tile_size = Vector2i(8, 8)
-sources/0 = SubResource("TileSetScenesCollectionSource_5v0kt")
-sources/1 = SubResource("TileSetScenesCollectionSource_h0p6i")
+[node name="Buttons" type="VBoxContainer" parent="Menu/ScrollContainer"]
+layout_mode = 2
 
-[node name="World" type="Node2D"]
+[node name="Attack" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Attack"
+flat = true
 
-[node name="Background" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAPAAAAAAAGAAcAAAAPAAEAAAAGAAcAAAAPAAIAAAAGAAcAAAAPAAMAAAAGAAcAAAAPAAQAAAAGAAcAAAAPAAUAAAAGAAcAAAAPAAYAAAAGAAcAAAAPAAcAAAAGAAcAAAAPAAgAAAAGAAcAAAAPAAkAAAAGAAcAAAAPAAoAAAAGAAcAAAAPAAsAAAAGAAcAAAAPAAwAAAAGAAcAAAAPAA0AAAAGAAcAAAAPAA4AAAAGAAcAAAAPAA8AAAAGAAcAAAAPABAAAAAGAAcAAAAPABEAAAAGAAcAAAAQAAAAAAAGAAcAAAAQAAEAAAAGAAcAAAAQAAIAAAAGAAcAAAAQAAMAAAAGAAcAAAAQAAQAAAAGAAcAAAAQAAUAAAAGAAcAAAAQAAYAAAAGAAcAAAAQAAcAAAAGAAcAAAAQAAgAAAAGAAcAAAAQAAkAAAAGAAcAAAAQAAoAAAAGAAcAAAAQAAsAAAAGAAcAAAAQAAwAAAAGAAcAAAAQAA0AAAAGAAcAAAAQAA4AAAAGAAcAAAAQAA8AAAAGAAcAAAAQABAAAAAGAAcAAAAQABEAAAAGAAcAAAARAAAAAAAGAAcAAAARAAEAAAAGAAcAAAARAAIAAAAGAAcAAAARAAMAAAAGAAcAAAARAAQAAAAGAAcAAAARAAUAAAAGAAcAAAARAAYAAAAGAAcAAAARAAcAAAAGAAcAAAARAAgAAAAGAAcAAAARAAkAAAAGAAcAAAARAAoAAAAGAAcAAAARAAsAAAAGAAcAAAARAAwAAAAGAAcAAAARAA0AAAAGAAcAAAARAA4AAAAGAAcAAAARAA8AAAAGAAcAAAARABAAAAAGAAcAAAARABEAAAAGAAcAAAASAAAAAAAGAAcAAAASAAEAAAAGAAcAAAASAAIAAAAGAAcAAAASAAMAAAAGAAcAAAASAAQAAAAGAAcAAAASAAUAAAAGAAcAAAASAAYAAAAGAAcAAAASAAcAAAAGAAcAAAASAAgAAAAGAAcAAAASAAkAAAAGAAcAAAASAAoAAAAGAAcAAAASAAsAAAAGAAcAAAASAAwAAAAGAAcAAAASAA0AAAAGAAcAAAASAA4AAAAGAAcAAAASAA8AAAAGAAcAAAASABAAAAAGAAcAAAASABEAAAAGAAcAAAATAAAAAAAGAAcAAAATAAEAAAAGAAcAAAATAAIAAAAGAAcAAAATAAMAAAAGAAcAAAATAAQAAAAGAAcAAAATAAUAAAAGAAcAAAATAAYAAAAGAAcAAAATAAcAAAAGAAcAAAATAAgAAAAGAAcAAAATAAkAAAAGAAcAAAATAAoAAAAGAAcAAAATAAsAAAAGAAcAAAATAAwAAAAGAAcAAAATAA0AAAAGAAcAAAATAA4AAAAGAAcAAAATAA8AAAAGAAcAAAATABAAAAAGAAcAAAATABEAAAAGAAcAAAAUAAAAAAAGAAcAAAAUAAEAAAAGAAcAAAAUAAIAAAAGAAcAAAAUAAMAAAAGAAcAAAAUAAQAAAAGAAcAAAAUAAUAAAAGAAcAAAAUAAYAAAAGAAcAAAAUAAcAAAAGAAcAAAAUAAgAAAAGAAcAAAAUAAkAAAAGAAcAAAAUAAoAAAAGAAcAAAAUAAsAAAAGAAcAAAAUAAwAAAAGAAcAAAAUAA0AAAAGAAcAAAAUAA4AAAAGAAcAAAAUAA8AAAAGAAcAAAAUABAAAAAGAAcAAAAUABEAAAAGAAcAAAAVAAAAAAAGAAcAAAAVAAEAAAAGAAcAAAAVAAIAAAAGAAcAAAAVAAMAAAAGAAcAAAAVAAQAAAAGAAcAAAAVAAUAAAAGAAcAAAAVAAYAAAAGAAcAAAAVAAcAAAAGAAcAAAAVAAgAAAAGAAcAAAAVAAkAAAAGAAcAAAAVAAoAAAAGAAcAAAAVAAsAAAAGAAcAAAAVAAwAAAAGAAcAAAAVAA0AAAAGAAcAAAAVAA4AAAAGAAcAAAAVAA8AAAAGAAcAAAAVABAAAAAGAAcAAAAVABEAAAAGAAcAAAAWAAAAAAAFAAcAAAAWAAEAAAAGAAcAAAAWAAIAAAAGAAcAAAAWAAMAAAAGAAcAAAAWAAQAAAAGAAcAAAAWAAUAAAAGAAcAAAAWAAYAAAAGAAcAAAAWAAcAAAAGAAcAAAAWAAgAAAAGAAcAAAAWAAkAAAAGAAcAAAAWAAoAAAAGAAcAAAAWAAsAAAAGAAcAAAAWAAwAAAAGAAcAAAAWAA0AAAAGAAcAAAAWAA4AAAAGAAcAAAAWAA8AAAAGAAcAAAAWABAAAAAGAAcAAAAWABEAAAAGAAcAAAAXAAAAAAAFAAcAAAAXAAEAAAAGAAcAAAAXAAIAAAAGAAcAAAAXAAMAAAAGAAcAAAAXAAQAAAAGAAcAAAAXAAUAAAAGAAcAAAAXAAYAAAAGAAcAAAAXAAcAAAAGAAcAAAAXAAgAAAAGAAcAAAAXAAkAAAAGAAcAAAAXAAoAAAAGAAcAAAAXAAsAAAAGAAcAAAAXAAwAAAAGAAcAAAAXAA0AAAAGAAcAAAAXAA4AAAAGAAcAAAAXAA8AAAAGAAcAAAAXABAAAAAGAAcAAAAXABEAAAAGAAcAAAAYAAAAAAAFAAcAAAAYAAEAAAAGAAcAAAAYAAIAAAAGAAcAAAAYAAMAAAAGAAcAAAAYAAQAAAAGAAcAAAAYAAUAAAAGAAcAAAAYAAYAAAAGAAcAAAAYAAcAAAAGAAcAAAAYAAgAAAAGAAcAAAAYAAkAAAAGAAcAAAAYAAoAAAAGAAcAAAAYAAsAAAAGAAcAAAAYAAwAAAAGAAcAAAAYAA0AAAAGAAcAAAAYAA4AAAAGAAcAAAAYAA8AAAAGAAcAAAAYABAAAAAGAAcAAAAYABEAAAAGAAcAAAAZAAAAAAAFAAcAAAAZAAEAAAAGAAcAAAAZAAIAAAAGAAcAAAAZAAMAAAAGAAcAAAAZAAQAAAAGAAcAAAAZAAUAAAAGAAcAAAAZAAYAAAAGAAcAAAAZAAcAAAAGAAcAAAAZAAgAAAAGAAcAAAAZAAkAAAAGAAcAAAAZAAoAAAAGAAcAAAAZAAsAAAAGAAcAAAAZAAwAAAAGAAcAAAAZAA0AAAAGAAcAAAAZAA4AAAAGAAcAAAAZAA8AAAAGAAcAAAAZABAAAAAGAAcAAAAZABEAAAAGAAcAAAAaAAAAAAAGAAcAAAAaAAEAAAAGAAcAAAAaAAIAAAAGAAcAAAAaAAMAAAAGAAcAAAAaAAQAAAAGAAcAAAAaAAUAAAAGAAcAAAAaAAYAAAAGAAcAAAAaAAcAAAAGAAcAAAAaAAgAAAAGAAcAAAAaAAkAAAAGAAcAAAAaAAoAAAAGAAcAAAAaAAsAAAAGAAcAAAAaAAwAAAAGAAcAAAAaAA0AAAAGAAcAAAAaAA4AAAAGAAcAAAAaAA8AAAAGAAcAAAAaABAAAAAGAAcAAAAaABEAAAAGAAcAAAAbAAAAAAAGAAcAAAAbAAEAAAAGAAcAAAAbAAIAAAAGAAcAAAAbAAMAAAAGAAcAAAAbAAQAAAAGAAcAAAAbAAUAAAAGAAcAAAAbAAYAAAAGAAcAAAAbAAcAAAAGAAcAAAAbAAgAAAAGAAcAAAAbAAkAAAAGAAcAAAAbAAoAAAAGAAcAAAAbAAsAAAAGAAcAAAAbAAwAAAAGAAcAAAAbAA0AAAAGAAcAAAAbAA4AAAAGAAcAAAAbAA8AAAAGAAcAAAAbABAAAAAGAAcAAAAbABEAAAAGAAcAAAAcAAAAAAAGAAcAAAAcAAEAAAAGAAcAAAAcAAIAAAAGAAcAAAAcAAMAAAAGAAcAAAAcAAQAAAAGAAcAAAAcAAUAAAAGAAcAAAAcAAYAAAAGAAcAAAAcAAcAAAAGAAcAAAAcAAgAAAAGAAcAAAAcAAkAAAAGAAcAAAAcAAoAAAAGAAcAAAAcAAsAAAAGAAcAAAAcAAwAAAAGAAcAAAAcAA0AAAAGAAcAAAAcAA4AAAAGAAcAAAAcAA8AAAAGAAcAAAAcABAAAAAGAAcAAAAcABEAAAAGAAcAAAAdAAAAAAAGAAcAAAAdAAEAAAAGAAcAAAAdAAIAAAAGAAcAAAAdAAMAAAAGAAcAAAAdAAQAAAAGAAcAAAAdAAUAAAAGAAcAAAAdAAYAAAAGAAcAAAAdAAcAAAAGAAcAAAAdAAgAAAAGAAcAAAAdAAkAAAAGAAcAAAAdAAoAAAAGAAcAAAAdAAsAAAAGAAcAAAAdAAwAAAAGAAcAAAAdAA0AAAAGAAcAAAAdAA4AAAAGAAcAAAAdAA8AAAAGAAcAAAAdABAAAAAGAAcAAAAdABEAAAAGAAcAAAAeAAAAAAAGAAcAAAAeAAEAAAAGAAcAAAAeAAIAAAAGAAcAAAAeAAMAAAAGAAcAAAAeAAQAAAAGAAcAAAAeAAUAAAAGAAcAAAAeAAYAAAAGAAcAAAAeAAcAAAAGAAcAAAAeAAgAAAAGAAcAAAAeAAkAAAAGAAcAAAAeAAoAAAAGAAcAAAAeAAsAAAAGAAcAAAAeAAwAAAAGAAcAAAAeAA0AAAAGAAcAAAAeAA4AAAAGAAcAAAAeAA8AAAAGAAcAAAAeABAAAAAGAAcAAAAeABEAAAAGAAcAAAAfAAAAAAAGAAcAAAAfAAEAAAAGAAcAAAAfAAIAAAAGAAcAAAAfAAMAAAAGAAcAAAAfAAQAAAAGAAcAAAAfAAUAAAAGAAcAAAAfAAYAAAAGAAcAAAAfAAcAAAAFAAcAAFAfAAgAAAAFAAcAAFAfAAkAAAAFAAcAAFAfAAoAAAAFAAcAAFAfAAsAAAAGAAcAAAAfAAwAAAAGAAcAAAAfAA0AAAAGAAcAAAAfAA4AAAAGAAcAAAAfAA8AAAAGAAcAAAAfABAAAAAGAAcAAAAfABEAAAAGAAcAAAA=")
-tile_set = SubResource("TileSet_u10ov")
+[node name="Inventory" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
 
-[node name="Walls" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAATABEAAAAHAAcAAAAUABEAAAAHAAcAAAAVABEAAAAHAAcAAAAVAAAAAAAHAAcAAAAUAAAAAAAHAAcAAAATAAAAAAAHAAcAAAASAAAAAAAHAAcAAAAPABEAAAAHAAcAAAAQABEAAAAHAAcAAAARABEAAAAHAAcAAAASABEAAAAHAAcAAAAPAAwAAAAHAAcAAAAPAAAAAAAHAAcAAAAPAAEAAAAHAAcAAAAPAAIAAAAHAAcAAAAPAAMAAAAHAAcAAAAPAAQAAAAHAAcAAAAPAAUAAAAHAAcAAAAPAAYAAAAHAAcAAAAPAAsAAAAHAAcAAAAPAA0AAAAHAAcAAAAPAA4AAAAHAAcAAAAPAA8AAAAHAAcAAAAPABAAAAAHAAcAAAAQAAAAAAAHAAcAAAARAAAAAAAHAAcAAAAaAAAAAAAHAAcAAAAaABEAAAAHAAcAAAAbAAAAAAAHAAcAAAAbABEAAAAHAAcAAAAcAAAAAAAHAAcAAAAcABEAAAAHAAcAAAAdAAAAAAAHAAcAAAAdABEAAAAHAAcAAAAeAAAAAAAHAAcAAAAeABEAAAAHAAcAAAAfAAAAAAAHAAcAAAAfAAEAAAAHAAcAAAAfAAIAAAAHAAcAAAAfAAMAAAAHAAcAAAAfAAQAAAAHAAcAAAAfAAUAAAAHAAcAAAAfAAsAAAAHAAcAAAAfAAwAAAAHAAcAAAAfAA0AAAAHAAcAAAAfAA4AAAAHAAcAAAAfAA8AAAAHAAcAAAAfABAAAAAHAAcAAAAfABEAAAAHAAcAAAAfAAYAAAAHAAcAAAAPAAcAAAAHAAcAAAAPAAgAAAAHAAcAAAAPAAkAAAAHAAcAAAAPAAoAAAAHAAcAAAAWABEAAAAHAAcAAAAXABEAAAAHAAcAAAAYABEAAAAHAAcAAAAZABEAAAAHAAcAAAAWAA4AAAAHAAcAAAAWAA8AAAAHAAcAAAAWABAAAAAHAAcAAAAXABAAAAAHAAcAAAAXAA8AAAAHAAcAAAAXAA4AAAAHAAcAAAAYAA4AAAAHAAcAAAAYAA8AAAAHAAcAAAAYABAAAAAHAAcAAAASAAUAAAAHAAcAAAATAAUAAAAHAAcAAAAUAAUAAAAHAAcAAAAUAAYAAAAHAAcAAAAUAAcAAAAHAAcAAAASAAQAAAAHAAcAAAARAAQAAAAHAAcAAAARAAUAAAAHAAcAAAAQAAUAAAAHAAcAAAAQAAQAAAAHAAcAAAATAAQAAAAHAAcAAAAUAAQAAAAHAAcAAAAVAAQAAAAHAAcAAAAVAAUAAAAHAAcAAAAVAAYAAAAHAAcAAAAVAAcAAAAHAAcAAAAVAA4AAAAHAAcAAAAVAA8AAAAHAAcAAAAVABAAAAAHAAcAAAAeAAYAAAAHAAcAAAAdAAYAAAAHAAcAAAAcAAYAAAAHAAcAAAA=")
-tile_set = SubResource("TileSet_4fpm3")
+[node name="Inventory2" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
 
-[node name="Scenes" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAASAA4AAAAAAAAAAQAdAAQAAQAAAAAAAQA=")
-tile_set = SubResource("TileSet_xmu0n")
+[node name="Inventory3" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
 
-[node name="Player" parent="." instance=ExtResource("1_s85bf")]
-position = Vector2(192, 72)
+[node name="Inventory4" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
+
+[node name="Inventory5" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
+
+[node name="Inventory6" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
+
+[node name="Inventory7" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
+
+[node name="Inventory8" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
+
+[node name="Inventory9" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
+
+[node name="Inventory10" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
+
+[node name="Inventory11" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
+
+[node name="Inventory12" type="Button" parent="Menu/ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Inventory"
+flat = true
+
+[node name="HUD" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 576.0
+offset_right = 512.0
+offset_bottom = 1152.0
+theme = ExtResource("2_5brb3")
+
+[node name="Stats" type="VBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 454.0
+offset_bottom = 256.0
+
+[node name="Line" type="Label" parent="HUD/Stats"]
+layout_mode = 2
+text = "------------------"
+
+[node name="Actions" type="Label" parent="HUD/Stats"]
+layout_mode = 2
+text = "Actions: 4"
+
+[node name="Coins" type="Label" parent="HUD/Stats"]
+layout_mode = 2
+text = "Coins: 102"
+
+[node name="Health" type="Label" parent="HUD/Stats"]
+layout_mode = 2
+text = "Health: |#####---|"
+
+[node name="XP" type="Label" parent="HUD/Stats"]
+layout_mode = 2
+text = "XP: |###---------|"
+
+[node name="MinimapRender" type="SubViewportContainer" parent="HUD"]
+layout_mode = 2
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 384.0
+offset_bottom = 512.0
+size_flags_vertical = 3
+stretch = true
+stretch_shrink = 4
+
+[node name="SubViewport" type="SubViewport" parent="HUD/MinimapRender"]
+handle_input_locally = false
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="Minimap" parent="HUD/MinimapRender/SubViewport" instance=ExtResource("3_civkx")]

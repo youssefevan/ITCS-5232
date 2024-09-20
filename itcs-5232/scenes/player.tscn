@@ -9,7 +9,6 @@ radius = 4.0
 [node name="Player" type="Area2D"]
 collision_layer = 2
 script = ExtResource("1_rpg5j")
-metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(4, 4)

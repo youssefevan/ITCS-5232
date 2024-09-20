@@ -1,0 +1,63 @@
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://kxvob6pjb2o6"]
+
+[ext_resource type="FontFile" uid="uid://qcl5slhglxw5" path="res://fonts/hack/Hack-Regular.ttf" id="1_ao1ev"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_276o5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8igt7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gkk7p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmd88"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tl80c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wa5fx"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_145mk"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_62udf"]
+color = Color(1, 1, 1, 1)
+thickness = 4
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_300qd"]
+color = Color(0, 1, 1, 1)
+thickness = 4
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_sk5fs"]
+color = Color(1, 0, 0, 1)
+thickness = 4
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dhmlk"]
+thickness = 4
+vertical = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s3che"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 1, 1, 1)
+Button/font_sizes/font_size = 36
+Button/fonts/font = ExtResource("1_ao1ev")
+Button/styles/disabled = SubResource("StyleBoxEmpty_276o5")
+Button/styles/focus = SubResource("StyleBoxEmpty_8igt7")
+Button/styles/hover = SubResource("StyleBoxEmpty_gkk7p")
+Button/styles/normal = SubResource("StyleBoxEmpty_nmd88")
+Button/styles/pressed = SubResource("StyleBoxEmpty_tl80c")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 36
+Label/fonts/font = ExtResource("1_ao1ev")
+ProgressBar/colors/font_color = Color(1, 1, 1, 1)
+ProgressBar/styles/background = SubResource("StyleBoxFlat_wa5fx")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_145mk")
+VScrollBar/styles/grabber = SubResource("StyleBoxLine_62udf")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxLine_300qd")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxLine_sk5fs")
+VScrollBar/styles/scroll = SubResource("StyleBoxLine_dhmlk")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_s3che")
