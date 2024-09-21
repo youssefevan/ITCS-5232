@@ -6,6 +6,13 @@ class_name Player
 
 @export var attack_scene : PackedScene
 
+var colors = {
+	"fire": Color.RED,
+	"ice": Color.CYAN,
+	"magic": Color.MAGENTA,
+	"necrotic": Color.GREEN,
+}
+
 var tile_size = 8
 var animation_speed = 5
 var moving = false
@@ -61,11 +68,13 @@ func movement_tween(dir):
 
 func enter_attack():
 	attacking = true
+	active_inputs = []
 	
 	var attack = attack_scene.instantiate()
+	attack.type = attack.types.ICE
+	attack.color = colors["ice"]
 	attack_handler.add_child(attack)
 	attack.position.y -= tile_size
-	attack.color = Color.RED
 
 func exit_attack():
 	attacking = false

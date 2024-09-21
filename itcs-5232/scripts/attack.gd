@@ -2,7 +2,9 @@ extends Area2D
 class_name Attack
 
 var damage : int
-enum type {FIRE, ICE, MAGIC, NECROTIC}
+enum types {FIRE, ICE, MAGIC, NECROTIC}
+
+var type : types
 
 @export var color : Color
 
