@@ -6,6 +6,8 @@ class_name Player
 
 @export var attack_scene : PackedScene
 
+var last_movement_direction
+
 var colors = {
 	"fire": Color.RED,
 	"ice": Color.CYAN,
@@ -24,6 +26,8 @@ var inputs = {"right": Vector2.RIGHT,
 			"down": Vector2.DOWN}
 
 var active_inputs = []
+
+var current_room
 
 func _physics_process(delta):
 	if !attacking:
@@ -56,6 +60,7 @@ func move(dir):
 	ray.force_raycast_update()
 	if !ray.is_colliding():
 		movement_tween(dir)
+		last_movement_direction = dir
 	elif ray.get_collider() is TileMap:# or ray.get_collider() is Enemy:
 		pass
 
@@ -80,3 +85,11 @@ func exit_attack():
 	attacking = false
 	for child in attack_handler.get_children():
 		child.call_deferred("free")
+
+
+func _on_area_entered(area):
+	if area.get_collision_layer_value(7):
+		
+		if last_movement_direction:# and area.get_parent().room_position != current_room:
+			#current_room = area.get_parent().room_position
+			get_parent().advance_camera(inputs[last_movement_direction])
