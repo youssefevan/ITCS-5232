@@ -1,4 +1,5 @@
 extends Node2D
+class_name Room
 
 var room_size = Vector2(192 * 8, 144 * 8)
 

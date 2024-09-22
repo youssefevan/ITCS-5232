@@ -27,7 +27,7 @@ var inputs = {"right": Vector2.RIGHT,
 
 var active_inputs = []
 
-var current_room
+var current_room = Vector2(0, 0)
 
 func _physics_process(delta):
 	if !attacking:
@@ -89,7 +89,7 @@ func exit_attack():
 
 func _on_area_entered(area):
 	if area.get_collision_layer_value(7):
-		
-		if last_movement_direction:# and area.get_parent().room_position != current_room:
-			#current_room = area.get_parent().room_position
+		if last_movement_direction and area.get_parent().global_position != current_room:
+			current_room = area.get_parent().global_position
+			active_inputs = []
 			get_parent().advance_camera(inputs[last_movement_direction])
