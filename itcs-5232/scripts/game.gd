@@ -9,12 +9,7 @@ var active_entities = []
 
 @onready var rooms = $Rooms
 
-@onready var starting_room_scene = preload("res://scenes/rooms/room_spawn.tscn")
-@onready var room1 = preload("res://scenes/rooms/room_1.tscn")
-@onready var room2 = preload("res://scenes/rooms/room_2.tscn")
-@onready var room3 = preload("res://scenes/rooms/room_3.tscn")
-@onready var room4 = preload("res://scenes/rooms/room_4.tscn")
-@onready var room5 = preload("res://scenes/rooms/room_5.tscn")
+@onready var room_scene = preload("res://scenes/room.tscn")
 
 var room_variants = []
 
@@ -31,7 +26,6 @@ var level_size = 4
 
 func _ready():
 	rng.randomize()
-	room_variants = [room1, room2, room3, room4, room5]
 	generate_level()
 
 func generate_level():
@@ -62,19 +56,14 @@ func choose_room_space():
 				if !(target_space.x >= level_size or target_space.x < -level_size) and !(target_space.y >= level_size or target_space.y < -level_size):
 						available_room_spaces.append(target_space)
 	
-	print(existing_rooms)
+	#print(existing_rooms)
+	Global.set_rooms(existing_rooms)
 
 func spawn_rooms():
 	for room in existing_rooms:
-		if room == Vector2.ZERO:
-			var r = starting_room_scene.instantiate()
-			rooms.add_child(r)
-			r.global_position = room * r.room_size
-		else:
-			var variant = rng.randi_range(0, len(room_variants)-1)
-			var r = room_variants[variant].instantiate()
-			rooms.add_child(r)
-			r.global_position = room * r.room_size
+		var r = room_scene.instantiate()
+		rooms.add_child(r)
+		r.global_position = room * r.room_size
 
 func start_turn() -> void:
 	pass
