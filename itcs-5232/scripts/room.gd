@@ -9,7 +9,25 @@ class_name Room
 
 @export var wall_color : Color
 
+var id : Vector2
+
 var room_size = Vector2(192 * 8, 144 * 8)
+
+var neighbors = []
+var closing_wall_coordinates = {
+	Vector2.UP: [
+			Vector2(10, 0), Vector2(11, 0), Vector2(12, 0), Vector2(13, 0)
+		],
+	Vector2.DOWN: [
+			Vector2(10, 17), Vector2(11, 17), Vector2(12, 17), Vector2(13, 17)
+		],
+	Vector2.LEFT: [
+			Vector2(0, 7), Vector2(0, 8), Vector2(0, 9), Vector2(0, 10)
+		],
+	Vector2.RIGHT: [
+			Vector2(23, 7), Vector2(23, 8), Vector2(23, 9), Vector2(23, 10)
+		]
+}
 
 func _ready():
 	var game = get_parent().get_parent()
@@ -27,3 +45,13 @@ func build_room():
 			var pixel_color = layout.get_pixel(x, y)
 			if pixel_color == wall_color:
 				wall_tiles.set_cell(Vector2(x, y), 0, Vector2(7, 7))
+	
+	for dir in Global.directions:
+		var neighbor =  id + dir
+		if neighbor in Global.rooms:
+			neighbors.append(neighbor)
+		else:
+			var tile_positions = closing_wall_coordinates[dir]
+			for pos in tile_positions:
+				wall_tiles.set_cell(pos, 0, Vector2(7, 7))
+	print(neighbors)

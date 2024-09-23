@@ -11,10 +11,8 @@ var active_entities = []
 
 @onready var room_scene = preload("res://scenes/room.tscn")
 
-var room_variants = []
-
 var available_room_spaces = []
-var number_of_rooms_to_spawn := 12
+var number_of_rooms := 12
 
 var existing_rooms = []
 
@@ -37,7 +35,7 @@ func generate_level():
 	for dir in directions:
 		available_room_spaces.append(dir)
 	
-	for i in number_of_rooms_to_spawn: 
+	for i in number_of_rooms: 
 		choose_room_space()
 	
 	spawn_rooms()
@@ -62,8 +60,12 @@ func choose_room_space():
 func spawn_rooms():
 	for room in existing_rooms:
 		var r = room_scene.instantiate()
+		r.id = room
 		rooms.add_child(r)
 		r.global_position = room * r.room_size
+
+func close_rooms():
+	pass
 
 func start_turn() -> void:
 	pass
