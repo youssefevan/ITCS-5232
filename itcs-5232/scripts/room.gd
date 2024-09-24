@@ -1,17 +1,28 @@
+@icon("res://sprites/editor_icons/room.png")
 extends Node2D
 class_name Room
 
+@export_category("Tiles")
 @export var background_tiles : TileMapLayer
 @export var wall_tiles : TileMapLayer
-@export var scene_tiles : TileMapLayer
 
-@export var layout_texture : Texture2D
+@export_category("Layouts")
+@export var layout_textures : Array[Texture2D]
 
+@export_category("Colors")
 @export var wall_color : Color
+@export var enemy_color : Color
+@export var item_color : Color
+
+@export_category("Spawners")
+@export var enemy_spawner_scene : PackedScene
+@export var item_spawner_scene : PackedScene
 
 var id : Vector2
 
 var room_size = Vector2(192 * 8, 144 * 8)
+
+var rng = RandomNumberGenerator.new()
 
 var neighbors = []
 var closing_wall_coordinates = {
@@ -31,21 +42,20 @@ var closing_wall_coordinates = {
 
 func _ready():
 	var game = get_parent().get_parent()
-	
+	rng.randomize()
 	build_room()
 
-func change_tile_color(new_color : Color):
-	pass
-
 func build_room():
-	var layout = layout_texture.get_image()
-	
-	for x in layout_texture.get_width()-1:
-		for y in layout_texture.get_height()-1:
-			var pixel_color = layout.get_pixel(x, y)
-			if pixel_color == wall_color:
-				wall_tiles.set_cell(Vector2(x, y), 0, Vector2(7, 7))
-	
+	if id != Vector2.ZERO:
+		var random_texure = layout_textures[rng.randi_range(0, len(layout_textures)-1)]
+		
+		var layout = random_texure.get_image()
+		
+		for x in random_texure.get_width()-1:
+			for y in random_texure.get_height()-1:
+				var pixel_color = layout.get_pixel(x, y)
+				set_layout(pixel_color, Vector2(x, y))
+		
 	for dir in Global.directions:
 		var neighbor =  id + dir
 		if neighbor in Global.rooms:
@@ -54,4 +64,17 @@ func build_room():
 			var tile_positions = closing_wall_coordinates[dir]
 			for pos in tile_positions:
 				wall_tiles.set_cell(pos, 0, Vector2(7, 7))
-	print(neighbors)
+	#print(neighbors)
+
+func set_layout(color, pos):
+	match color:
+		wall_color:
+			wall_tiles.set_cell(pos, 0, Vector2(7, 7))
+		enemy_color:
+			var enemy = enemy_spawner_scene.instantiate()
+			add_child(enemy)
+			enemy.position = pos * 8
+		item_color:
+			var item = item_spawner_scene.instantiate()
+			add_child(item)
+			item.position = pos * 8

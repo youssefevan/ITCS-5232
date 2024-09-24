@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://yi0y3rwgye6t"]
+[gd_scene load_steps=5 format=4 uid="uid://yi0y3rwgye6t"]
 
 [ext_resource type="Script" path="res://scripts/gui/minimap.gd" id="1_bp301"]
 [ext_resource type="Texture2D" uid="uid://pflr6dfh4e1f" path="res://sprites/sprite.png" id="1_v6uvb"]
@@ -10,6 +10,9 @@ texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
 5:1/0 = 0
 7:1/0 = 0
+3:7/next_alternative_id = 2
+3:7/0 = 0
+3:7/1 = 1
 
 [sub_resource type="TileSet" id="TileSet_j0dxn"]
 tile_size = Vector2i(8, 8)
@@ -19,5 +22,6 @@ sources/2 = SubResource("TileSetAtlasSource_wigsy")
 script = ExtResource("1_bp301")
 
 [node name="TileMap" type="TileMapLayer" parent="."]
-position = Vector2(32, 32)
+position = Vector2(24, 24)
+tile_map_data = PackedByteArray("AAD9//3/AgAGAAcAAAD9//7/AgAGAAcAAAD9////AgAGAAcAAAD9/wAAAgAGAAcAAAD9/wEAAgAGAAcAAAD+/wEAAgAGAAcAAAD//wEAAgAGAAcAAAD//wAAAgAGAAcAAAD/////AgAGAAcAAAD+//7/AgAGAAcAAAD///7/AgAGAAcAAAAAAP7/AgAGAAcAAAAAAP//AgAGAAcAAAAAAAAAAgAGAAcAAAAAAAEAAgAGAAcAAAD+/wAAAgAGAAcAAAD+////AgAGAAcAAAD+//3/AgAGAAcAAAD///3/AgAGAAcAAAAAAP3/AgAGAAcAAAABAP7/AgAGAAcAAAABAP//AgAGAAcAAAABAAAAAgAGAAcAAAABAAEAAgAGAAcAAAABAP3/AgAGAAcAAAD9/wIAAgAGAAcAAAD+/wIAAgAGAAcAAAD//wIAAgAGAAcAAAAAAAIAAgAGAAcAAAABAAIAAgAGAAcAAAACAAIAAgAGAAcAAAACAAEAAgAGAAcAAAACAAAAAgAGAAcAAAACAP//AgAGAAcAAAACAP7/AgAGAAcAAAACAP3/AgAGAAcAAAADAP3/AgAGAAcAAAADAP7/AgAGAAcAAAADAP//AgAGAAcAAAADAAAAAgAGAAcAAAADAAEAAgAGAAcAAAADAAIAAgAGAAcAAAACAAMAAgAGAAcAAAADAAMAAgAGAAcAAAABAAMAAgAGAAcAAAAAAAMAAgAGAAcAAAD//wMAAgAGAAcAAAD+/wMAAgAGAAcAAAD9/wMAAgAGAAcAAAA=")
 tile_set = SubResource("TileSet_j0dxn")

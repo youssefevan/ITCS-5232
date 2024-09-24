@@ -1,6 +1,8 @@
 extends Area2D
 class_name Player
 
+signal inventory_mode(mode : bool)
+
 @onready var ray = $PhysicsRay
 @onready var attack_handler = $AttackHandler
 
@@ -16,7 +18,7 @@ var colors = {
 }
 
 var tile_size = 8
-var animation_speed = 5
+var animation_speed = 5 #* 4
 var moving = false
 var attacking = false
 
@@ -26,19 +28,31 @@ var inputs = {"right": Vector2.RIGHT,
 			"down": Vector2.DOWN}
 
 var active_inputs = []
+var in_inventory := false
 
 var current_room = Vector2(0, 0)
 
 func _physics_process(delta):
-	if !attacking:
+	if !attacking and !in_inventory:
 		handle_movement()
+	elif attacking and !in_inventory:
+		handle_aiming()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("attack"):
-		if !attacking:
-			enter_attack()
-		else:
-			exit_attack()
+	if !in_inventory:
+		if Input.is_action_just_pressed("attack"):
+			if !attacking:
+				enter_attack()
+			else:
+				exit_attack()
+		
+		if Input.is_action_just_pressed("attack_cancel"):
+			if attacking:
+				exit_attack()
+	
+	if Input.is_action_just_pressed("inventory_toggle"):
+		in_inventory = !in_inventory
+		emit_signal("inventory_mode", in_inventory)
 
 func handle_movement():
 	for dir in inputs.keys():
@@ -53,6 +67,19 @@ func handle_movement():
 	
 	if len(active_inputs) > 0 and !moving:
 		move(active_inputs.back())
+
+func handle_aiming():
+	for dir in inputs.keys():
+		if Input.is_action_just_pressed(dir):
+			match dir:
+				"up":
+					attack_handler.rotation_degrees = 0
+				"down":
+					attack_handler.rotation_degrees = 180
+				"left":
+					attack_handler.rotation_degrees = -90
+				"right":
+					attack_handler.rotation_degrees = 90
 
 func move(dir):
 	ray.target_position = inputs[dir] * tile_size
@@ -86,10 +113,12 @@ func exit_attack():
 	for child in attack_handler.get_children():
 		child.call_deferred("free")
 
-
 func _on_area_entered(area):
 	if area.get_collision_layer_value(7):
 		if last_movement_direction and area.get_parent().global_position != current_room:
 			current_room = area.get_parent().global_position
 			active_inputs = []
+			
+			Global.occupied_room = area.get_parent().id
+			
 			get_parent().advance_camera(inputs[last_movement_direction])

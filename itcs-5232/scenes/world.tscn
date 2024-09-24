@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://macpb23f3d27"]
+[gd_scene load_steps=5 format=3 uid="uid://macpb23f3d27"]
 
 [ext_resource type="PackedScene" uid="uid://ccye5cat0b1ls" path="res://scenes/game.tscn" id="1_3gbxe"]
 [ext_resource type="Theme" uid="uid://kxvob6pjb2o6" path="res://themes/gui.tres" id="2_5brb3"]
+[ext_resource type="Script" path="res://scripts/gui/menu.gd" id="3_1xadd"]
 [ext_resource type="PackedScene" uid="uid://yi0y3rwgye6t" path="res://scenes/minimap.tscn" id="3_civkx"]
 
 [node name="World" type="Control"]
@@ -28,6 +29,7 @@ anchors_preset = 0
 offset_right = 512.0
 offset_bottom = 576.0
 theme = ExtResource("2_5brb3")
+script = ExtResource("3_1xadd")
 
 [node name="ActionsRemaining" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
@@ -56,63 +58,92 @@ text = "|#########-------|"
 layout_mode = 2
 text = "------------------"
 
+[node name="Title" type="Label" parent="Menu/ActionsRemaining"]
+layout_mode = 2
+text = "Inventory"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Menu"]
 layout_mode = 2
 offset_left = 64.0
-offset_top = 208.0
+offset_top = 272.0
 offset_right = 456.0
-offset_bottom = 640.0
+offset_bottom = 648.0
+follow_focus = true
 
 [node name="Inventory" type="VBoxContainer" parent="Menu/ScrollContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
-text = "Inventory"
-
-[node name="Item" type="Label" parent="Menu/ScrollContainer/Inventory"]
-layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item2" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button2" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item3" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button3" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item4" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button4" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item5" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button5" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item6" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button6" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item7" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button7" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item8" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button8" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item9" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button9" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item10" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button10" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
 
-[node name="Item11" type="Label" parent="Menu/ScrollContainer/Inventory"]
+[node name="Button11" type="Button" parent="Menu/ScrollContainer/Inventory"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "> Item 1"
+alignment = 0
+
+[node name="Button12" type="Button" parent="Menu/ScrollContainer/Inventory"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "> Item 1"
+alignment = 0
 
 [node name="HUD" type="Control" parent="."]
 anchors_preset = 0
@@ -150,17 +181,17 @@ text = "------------------"
 
 [node name="MinimapRender" type="SubViewportContainer" parent="HUD"]
 layout_mode = 2
-offset_left = 128.0
-offset_top = 216.0
-offset_right = 384.0
-offset_bottom = 472.0
+offset_left = 144.0
+offset_top = 232.0
+offset_right = 368.0
+offset_bottom = 456.0
 size_flags_vertical = 3
 stretch = true
 stretch_shrink = 4
 
 [node name="SubViewport" type="SubViewport" parent="HUD/MinimapRender"]
 handle_input_locally = false
-size = Vector2i(64, 64)
+size = Vector2i(56, 56)
 render_target_update_mode = 4
 
 [node name="Minimap" parent="HUD/MinimapRender/SubViewport" instance=ExtResource("3_civkx")]
@@ -205,3 +236,7 @@ offset_right = 195.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "------------------"
+
+[connection signal="inventory_mode" from="GameRender/SubViewport/Game/Player" to="Menu" method="_on_player_inventory_mode"]
+
+[editable path="GameRender/SubViewport/Game"]

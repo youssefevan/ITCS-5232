@@ -1,6 +1,7 @@
 extends Node
 
 var rooms = []
+var occupied_room : Vector2
 
 var directions = [
 	Vector2.UP,

@@ -20,7 +20,7 @@ var rng = RandomNumberGenerator.new()
 
 var directions = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
 
-var level_size = 4
+var level_size = 3
 
 func _ready():
 	rng.randomize()
@@ -51,7 +51,7 @@ func choose_room_space():
 		
 		if !(target_space in available_room_spaces):
 			if !(target_space in existing_rooms):
-				if !(target_space.x >= level_size or target_space.x < -level_size) and !(target_space.y >= level_size or target_space.y < -level_size):
+				if !(abs(target_space.x) > level_size) and !(abs(target_space.y) > level_size):
 						available_room_spaces.append(target_space)
 	
 	#print(existing_rooms)
@@ -63,9 +63,6 @@ func spawn_rooms():
 		r.id = room
 		rooms.add_child(r)
 		r.global_position = room * r.room_size
-
-func close_rooms():
-	pass
 
 func start_turn() -> void:
 	pass
@@ -80,3 +77,10 @@ func advance_camera(direction):
 	await tween.finished
 	get_tree().paused = false
 	#camera.position += Vector2(192, 144) * direction
+
+func _input(event):
+	if Input.is_action_just_pressed("debug_camera_out"):
+		camera.zoom = Vector2(0.1, 0.1)
+	
+	if Input.is_action_just_pressed("debug_camera_in"):
+		camera.zoom = Vector2(1, 1)

@@ -1,5 +1,5 @@
 extends Area2D
-class_name Enemy
+class_name Item
 
 
 # Called when the node enters the scene tree for the first time.
