@@ -46,15 +46,20 @@ func _ready():
 	build_room()
 
 func build_room():
+	var spawn_texture = layout_textures[0]
+	var random_texure = layout_textures[rng.randi_range(1, len(layout_textures)-1)]
+	var texture
+	
 	if id != Vector2.ZERO:
-		var random_texure = layout_textures[rng.randi_range(0, len(layout_textures)-1)]
+		texture = random_texure
+	else:
+		texture = spawn_texture
 		
-		var layout = random_texure.get_image()
-		
-		for x in random_texure.get_width()-1:
-			for y in random_texure.get_height()-1:
-				var pixel_color = layout.get_pixel(x, y)
-				set_layout(pixel_color, Vector2(x, y))
+	var layout = texture.get_image()
+	for x in texture.get_width()-1:
+		for y in texture.get_height()-1:
+			var pixel_color = layout.get_pixel(x, y)
+			set_layout(pixel_color, Vector2(x, y))
 		
 	for dir in Global.directions:
 		var neighbor =  id + dir

@@ -18,7 +18,7 @@ var colors = {
 }
 
 var tile_size = 8
-var animation_speed = 5 #* 4
+var animation_speed = 5 * 4
 var moving = false
 var attacking = false
 
@@ -52,6 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("inventory_toggle"):
 		in_inventory = !in_inventory
+		active_inputs = []
 		emit_signal("inventory_mode", in_inventory)
 
 func handle_movement():

@@ -8,7 +8,7 @@ radius = 4.0
 
 [node name="Enemy" type="Area2D"]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 71
 script = ExtResource("1_6x0pf")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -18,3 +18,12 @@ region_rect = Rect2(32, 0, 8, 8)
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_df04u")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+process_mode = 3
+position = Vector2(-2.38419e-07, 2.38419e-07)
+scale = Vector2(0.4, 0.4)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

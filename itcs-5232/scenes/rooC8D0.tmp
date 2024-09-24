@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ltbjw3k57uye"]
+[gd_scene load_steps=11 format=3 uid="uid://ltbjw3k57uye"]
 
 [ext_resource type="Script" path="res://scripts/room.gd" id="1_er8y4"]
 [ext_resource type="Texture2D" uid="uid://dft1yepaei1lt" path="res://sprites/rooms/room1.png" id="2_grrj0"]
@@ -10,15 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://c1tgbg7qvnylw" path="res://scenes/enemy_spawner.tscn" id="5_hxspl"]
 [ext_resource type="Texture2D" uid="uid://bf0ryshnu67lf" path="res://sprites/rooms/room4.png" id="5_m0rx8"]
 [ext_resource type="PackedScene" uid="uid://n8hgag03eqam" path="res://scenes/item_spawner.tscn" id="6_yf456"]
-[ext_resource type="Texture2D" uid="uid://bgluff0m2tnte" path="res://sprites/rooms/room5.png" id="7_wt3sm"]
-[ext_resource type="Texture2D" uid="uid://byc7l7ex3g3j4" path="res://sprites/rooms/room6.png" id="8_3mj4x"]
-[ext_resource type="Texture2D" uid="uid://cftp28v8016q8" path="res://sprites/rooms/room7.png" id="9_06t3e"]
 
 [node name="Room" type="Node2D" node_paths=PackedStringArray("background_tiles", "wall_tiles")]
 script = ExtResource("1_er8y4")
 background_tiles = NodePath("Tiles/Background")
 wall_tiles = NodePath("Tiles/Walls")
-layout_textures = Array[Texture2D]([ExtResource("2_i5gtg"), ExtResource("2_grrj0"), ExtResource("3_6c68n"), ExtResource("4_3w00c"), ExtResource("5_m0rx8"), ExtResource("7_wt3sm"), ExtResource("8_3mj4x"), ExtResource("9_06t3e")])
+layout_textures = Array[Texture2D]([ExtResource("2_i5gtg"), ExtResource("2_grrj0"), ExtResource("3_6c68n"), ExtResource("4_3w00c"), ExtResource("5_m0rx8")])
 wall_color = Color(1, 1, 1, 1)
 enemy_color = Color(1, 0, 0, 1)
 item_color = Color(0, 1, 0, 1)
