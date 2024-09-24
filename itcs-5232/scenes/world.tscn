@@ -27,7 +27,7 @@ render_target_update_mode = 4
 [node name="Menu" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 512.0
-offset_bottom = 576.0
+offset_bottom = 648.0
 theme = ExtResource("2_5brb3")
 script = ExtResource("3_1xadd")
 
