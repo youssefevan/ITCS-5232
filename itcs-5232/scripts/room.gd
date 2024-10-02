@@ -40,10 +40,13 @@ var closing_wall_coordinates = {
 		]
 }
 
+var astar_grid
+
 func _ready():
 	var game = get_parent().get_parent()
 	rng.randomize()
 	build_room()
+	setup_astar()
 
 func build_room():
 	var spawn_texture = layout_textures[0]
@@ -83,3 +86,23 @@ func set_layout(color, pos):
 			var item = item_spawner_scene.instantiate()
 			add_child(item)
 			item.position = pos * 8
+
+func setup_astar():
+	astar_grid = AStarGrid2D.new()
+	astar_grid.region = wall_tiles.get_used_rect()
+	astar_grid.cell_size = Vector2(8, 8)
+	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	
+	astar_grid.update()
+	
+	var region_size = astar_grid.region.size
+	var region_position = astar_grid.region.position
+	
+	for x in region_size.x:
+		for y in region_size.y:
+			var tile_position = Vector2i(x + region_position.x, y + region_position.y)
+			
+			var tile_data = wall_tiles.get_cell_tile_data(tile_position)
+			
+			if tile_data != null:
+				astar_grid.set_point_solid(tile_position)
