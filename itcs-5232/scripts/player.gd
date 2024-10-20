@@ -18,7 +18,7 @@ var colors = {
 }
 
 var tile_size = 8
-var animation_speed = 5 * 4
+var animation_speed = 6
 var moving = false
 var attacking = false
 
@@ -29,8 +29,6 @@ var inputs = {"right": Vector2.RIGHT,
 
 var active_inputs = []
 var in_inventory := false
-
-var current_room = Vector2(0, 0)
 
 func _physics_process(delta):
 	if !attacking and !in_inventory:
@@ -114,12 +112,7 @@ func exit_attack():
 	for child in attack_handler.get_children():
 		child.call_deferred("free")
 
-func _on_area_entered(area):
-	if area.get_collision_layer_value(7):
-		if last_movement_direction and area.get_parent().global_position != current_room:
-			current_room = area.get_parent().global_position
-			active_inputs = []
-			
-			Global.occupied_room = area.get_parent().id
-			
-			get_parent().advance_camera(inputs[last_movement_direction])
+func _on_fog_radius_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	if body is TileMapLayer:
+		var cell_pos = body.get_coords_for_body_rid(body_rid)
+		body.erase_cell(cell_pos)

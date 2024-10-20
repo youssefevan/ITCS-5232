@@ -386,7 +386,7 @@ attack_cancel={
 2d_physics/layer_4="Item"
 2d_physics/layer_5="Hitbox"
 2d_physics/layer_6="Hurtbox"
-2d_physics/layer_7="CameraRoom"
+2d_physics/layer_7="Fog"
 
 [rendering]
 

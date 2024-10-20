@@ -23,6 +23,7 @@ size = Vector2i(1536, 1152)
 render_target_update_mode = 4
 
 [node name="Game" parent="GameRender/SubViewport" instance=ExtResource("1_3gbxe")]
+scale = Vector2(4, 4)
 
 [node name="Menu" type="Control" parent="."]
 anchors_preset = 0

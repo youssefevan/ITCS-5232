@@ -46,7 +46,6 @@ func _ready():
 	var game = get_parent().get_parent()
 	rng.randomize()
 	build_room()
-	setup_astar()
 
 func build_room():
 	var spawn_texture = layout_textures[0]
@@ -96,7 +95,9 @@ func setup_astar():
 	astar_grid.update()
 	
 	var region_size = astar_grid.region.size
+	astar_grid.region.position = Vector2i(global_position/8/8)
 	var region_position = astar_grid.region.position
+	print(region_position)
 	
 	for x in region_size.x:
 		for y in region_size.y:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://doe7qpfdwxevf"]
+[gd_scene load_steps=6 format=3 uid="uid://doe7qpfdwxevf"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rpg5j"]
 [ext_resource type="PackedScene" uid="uid://blk6e2hwep16e" path="res://scenes/attack.tscn" id="2_crqo3"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jv4ov"]
 radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h40ij"]
+radius = 44.0
 
 [node name="Player" type="Area2D" groups=["Player"]]
 collision_layer = 2
@@ -30,4 +33,13 @@ target_position = Vector2(0, 8)
 [node name="AttackHandler" type="Node2D" parent="."]
 position = Vector2(4, 4)
 
+[node name="FogRadius" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FogRadius"]
+position = Vector2(4, 4)
+shape = SubResource("CircleShape2D_h40ij")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_shape_entered" from="FogRadius" to="." method="_on_fog_radius_body_shape_entered"]
