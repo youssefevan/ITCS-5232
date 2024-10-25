@@ -9,17 +9,17 @@ void vertex() {
 
 void fragment() {
 	vec4 textureColor = texture(TEXTURE, UV);
-	
+
 	if (textureColor == vec4(1.0, 1.0, 1.0, 1.0)) {
 		COLOR = inputColor;
 	}
-	
+
 	if (transparentBG == true) {
 		if (textureColor == vec4(0.0, 0.0, 0.0, 1.0)) {
 			COLOR = vec4(0.0, 0.0, 0.0, 0.0);
 		}
 	}
-	
+
 }
 
 //void light() {
