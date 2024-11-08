@@ -1,45 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://doe7qpfdwxevf"]
+[gd_scene load_steps=5 format=3 uid="uid://cp6juihhr0mvn"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_rpg5j"]
-[ext_resource type="PackedScene" uid="uid://blk6e2hwep16e" path="res://scenes/attack.tscn" id="2_crqo3"]
-[ext_resource type="Texture2D" uid="uid://pflr6dfh4e1f" path="res://sprites/sprite.png" id="2_krjxa"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_86n1k"]
+[ext_resource type="PackedScene" uid="uid://bit4oha3ntgpj" path="res://models/sword.glb" id="2_7ypyc"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jv4ov"]
-radius = 2.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_be8gj"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_h40ij"]
-radius = 44.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_pmmve"]
 
-[node name="Player" type="Area2D" groups=["Player"]]
-collision_layer = 2
-collision_mask = 65
-script = ExtResource("1_rpg5j")
-attack_scene = ExtResource("2_crqo3")
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_86n1k")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(4, 4)
-texture = ExtResource("2_krjxa")
-region_enabled = true
-region_rect = Rect2(0, 0, 8, 8)
+[node name="Mesh" type="CSGSphere3D" parent="."]
+material_override = SubResource("StandardMaterial3D_be8gj")
+radial_segments = 24
+rings = 12
 
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(4, 4)
-shape = SubResource("CircleShape2D_jv4ov")
+[node name="CSGBox3D" type="CSGBox3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00271964, 0.611063, -0.355244)
+size = Vector3(0.347656, 0.112732, 0.145508)
 
-[node name="PhysicsRay" type="RayCast2D" parent="."]
-position = Vector2(4, 4)
-target_position = Vector2(0, 8)
+[node name="Sword" type="Node3D" parent="Mesh"]
+transform = Transform3D(-6.0623e-08, -5.97795e-09, 1.2, -0.708642, 0.968414, -3.09757e-08, -0.968414, -0.708642, -5.24537e-08, 0.588406, 0, -0.256995)
 
-[node name="AttackHandler" type="Node2D" parent="."]
-position = Vector2(4, 4)
+[node name="sword" parent="Mesh/Sword" instance=ExtResource("2_7ypyc")]
 
-[node name="FogRadius" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 64
+[node name="PhysCol" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_pmmve")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FogRadius"]
-position = Vector2(4, 4)
-shape = SubResource("CircleShape2D_h40ij")
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_shape_entered" from="FogRadius" to="." method="_on_fog_radius_body_shape_entered"]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.478002, 0.878359, 0, -0.878359, 0.478002, 0, 7.91629, 4.76919)
+current = true

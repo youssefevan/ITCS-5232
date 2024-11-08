@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfckj0u8wevqp"]
+
+[ext_resource type="PackedScene" uid="uid://88g1c7thgwt0" path="res://models/gridblock.glb" id="1_4dg4o"]
+[ext_resource type="PackedScene" uid="uid://ix8bnj3fs045" path="res://models/tree.glb" id="2_c80uj"]
+
+[node name="Grid" type="Node3D"]
+
+[node name="gridblock" parent="." instance=ExtResource("1_4dg4o")]
+
+[node name="tree" parent="." instance=ExtResource("2_c80uj")]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://icaero35h6gc"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_57c85"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yohud"]
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.670245, -0.620748, 0.406748, 0, 0.548074, 0.83643, -0.74214, -0.560613, 0.367344, 0, 4.95501, 0)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("1_57c85")
+
+[node name="Mesh" type="CSGBox3D" parent="Player"]
+
+[node name="PhysCol" type="CollisionShape3D" parent="Player"]
+shape = SubResource("BoxShape3D_yohud")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.478002, 0.878359, 0, -0.878359, 0.478002, 0, 7.91629, 4.01821)
+current = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(20, 1, 20)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03599, 0.349802, 4.50433)
+use_collision = true
+size = Vector3(2, 2, 2)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21236, 0.349802, -7.08292)
+use_collision = true
+size = Vector3(2, 2, 2)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.52261, 0.349801, -5.30599)
+use_collision = true
+size = Vector3(2, 2, 2)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7329, 0.3498, 2.11681)
+use_collision = true
+size = Vector3(2, 2, 2)
