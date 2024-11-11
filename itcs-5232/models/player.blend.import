@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://q54jyglikk18"
-path="res://.godot/imported/sword.blend-a9870d9aca82021bd54bbd23828f9de9.scn"
+uid="uid://fbdihai0segm"
+path="res://.godot/imported/player.blend-e2c223f19bf3423a1599f27073b6610f.scn"
 
 [deps]
 
-source_file="res://models/sword.blend"
-dest_files=["res://.godot/imported/sword.blend-a9870d9aca82021bd54bbd23828f9de9.scn"]
+source_file="res://models/player.blend"
+dest_files=["res://.godot/imported/player.blend-e2c223f19bf3423a1599f27073b6610f.scn"]
 
 [params]
 
