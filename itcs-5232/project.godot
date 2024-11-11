@@ -38,6 +38,10 @@ right={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_32="CameraRay"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
