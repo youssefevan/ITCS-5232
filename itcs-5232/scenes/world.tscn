@@ -1,17 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3tfxx7py1518"]
+[gd_scene load_steps=11 format=3 uid="uid://c3tfxx7py1518"]
 
 [ext_resource type="PackedScene" uid="uid://b4e2ho0fnmaib" path="res://scenes/player.tscn" id="1_ybdjq"]
 [ext_resource type="PackedScene" uid="uid://uw0e20biq6xo" path="res://models/street_light.glb" id="2_b53rf"]
 [ext_resource type="PackedScene" uid="uid://cka34081fyin3" path="res://models/tower.glb" id="2_f4um8"]
+[ext_resource type="PackedScene" uid="uid://bbskohhj6ijgr" path="res://models/tombstone.glb" id="2_vwfab"]
+[ext_resource type="PackedScene" uid="uid://dh47jhenpais1" path="res://scenes/enemy.tscn" id="4_f6dwh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gkbf7"]
 size = Vector3(1000, 1, 1000)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t6aqu"]
+sky_top_color = Color(0.140048, 0.085229, 0.289414, 1)
+sky_horizon_color = Color(0.870933, 0.32764, 0.154682, 1)
+sky_curve = 0.0955921
+ground_bottom_color = Color(0.0336983, 0.0550167, 0.189174, 1)
+ground_horizon_color = Color(0.670226, 0.188865, 0.162138, 1)
+
+[sub_resource type="Sky" id="Sky_8c4cg"]
+sky_material = SubResource("ProceduralSkyMaterial_t6aqu")
+
 [sub_resource type="Environment" id="Environment_opvl4"]
 background_mode = 1
-background_color = Color(0.0666667, 0.0745098, 0.192157, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iigjw"]
+background_color = Color(0.0589118, 0.0662506, 0.176449, 1)
+sky = SubResource("Sky_8c4cg")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qifvq"]
 height = 6.50565
@@ -43,40 +54,43 @@ size = Vector3(120, 1, 120)
 
 [node name="Player" parent="." instance=ExtResource("1_ybdjq")]
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 9.5986, 0.5, 0.411321)
-material_override = SubResource("StandardMaterial3D_iigjw")
-use_collision = true
+[node name="Node3D" type="Node" parent="."]
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.46473, 0.5, 8.32545)
-material_override = SubResource("StandardMaterial3D_iigjw")
-use_collision = true
+[node name="tombstone" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0, 0, -3.50887)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -9.18526, 0.5, -4.75215)
-material_override = SubResource("StandardMaterial3D_iigjw")
-use_collision = true
+[node name="tombstone2" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 2.5114, 0, -9.23486)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 1.35181, 0.5, -16.5188)
-material_override = SubResource("StandardMaterial3D_iigjw")
-use_collision = true
+[node name="tombstone3" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -12.6575, 0, -4.8148)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="."]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10.6926, 0.5, -9.4557)
-material_override = SubResource("StandardMaterial3D_iigjw")
-use_collision = true
+[node name="tombstone4" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -13.0593, 0, 3.4226)
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10.1224, 0.5, 10.5794)
-material_override = SubResource("StandardMaterial3D_iigjw")
-use_collision = true
+[node name="tombstone5" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -5.72599, 0, 7.64175)
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="."]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -6.19188, 0.5, 9.33659)
-material_override = SubResource("StandardMaterial3D_iigjw")
-use_collision = true
+[node name="tombstone6" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 11.7534, 0, -4.11161)
+
+[node name="tombstone7" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 2.75336, 0, 0.888393)
+
+[node name="tombstone8" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 7.77616, 0, 15.0527)
+
+[node name="tombstone9" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 14.7762, 0, 10.0527)
+
+[node name="tombstone10" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -11.6438, 0, 12.765)
+
+[node name="tombstone11" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -9.73512, 0, -11.9472)
+
+[node name="tombstone12" parent="Node3D" instance=ExtResource("2_vwfab")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 9.35154, 0, -10.8422)
 
 [node name="StreetLight" type="StaticBody3D" parent="."]
 transform = Transform3D(0.726119, 0, -0.687569, 0, 1, 0, 0.687569, 0, 0.726119, 3, 3.10327, -3)
@@ -97,11 +111,17 @@ spot_angle = 66.0938
 shape = SubResource("CylinderShape3D_qifvq")
 
 [node name="tower" parent="." instance=ExtResource("2_f4um8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5963, -9.53674e-07, 17.7103)
+transform = Transform3D(0.854685, 0, 0.519146, 0, 1, 0, -0.519146, 0, 0.854685, 21.5963, -9.53674e-07, 17.7103)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="tower"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.08152, 2.31319, 1.14259)
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.548183, 2.88243, -0.203741)
 light_color = Color(1, 0.7, 0, 1)
 shadow_enabled = true
 shadow_bias = 0.3
-omni_range = 7.0
+omni_range = 10.5268
+
+[node name="Enemy" parent="." instance=ExtResource("4_f6dwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61893, 0, -5.69247)
+
+[node name="Enemy2" parent="." instance=ExtResource("4_f6dwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.202, 3.8147e-06, 16.892)

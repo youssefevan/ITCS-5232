@@ -3,20 +3,38 @@ extends CharacterBody3D
 var ray_origin = Vector3()
 var ray_target = Vector3()
 
-const MAX_SPEED = 400
+const SPEED = 400
 
 var input_dir : Vector3
+var fire_rate = 0.3
+var can_shoot := true
+
+@onready var arrow_scene = preload("res://scenes/arrow.tscn")
 
 func _physics_process(delta):
 	handle_aim()
+	handle_shooting()
 	
 	input_dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input_dir.z = Input.get_action_strength("down") - Input.get_action_strength("up")
 	input_dir.y = 0
 	
-	velocity = MAX_SPEED * input_dir * delta
+	input_dir = input_dir.normalized()
+	
+	velocity = SPEED * input_dir * delta
 	
 	move_and_slide()
+
+func handle_shooting():
+	if Input.is_action_pressed("shoot"):
+		if can_shoot:
+			var arrow = arrow_scene.instantiate()
+			arrow.position = $Model/Bow/ArrowPos.global_position
+			arrow.rotation.y = $Model/Bow/ArrowPos.global_rotation.y + (PI/2)
+			get_parent().add_child(arrow)
+			can_shoot = false
+			await get_tree().create_timer(fire_rate).timeout
+			can_shoot = true
 
 func handle_aim():
 	var mouse_pos = get_viewport().get_mouse_position()
