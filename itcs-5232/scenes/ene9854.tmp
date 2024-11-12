@@ -14,8 +14,7 @@ script = ExtResource("1_mqtny")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_ol8ds")
 
-[node name="Mesh" type="Node3D" parent="."]
-
-[node name="enemy" parent="Mesh" instance=ExtResource("1_w0wfr")]
+[node name="enemy" parent="." instance=ExtResource("1_w0wfr")]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true

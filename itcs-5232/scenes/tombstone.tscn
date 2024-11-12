@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://xtohugsas67j"]
+
+[ext_resource type="PackedScene" uid="uid://bbskohhj6ijgr" path="res://models/tombstone.glb" id="1_551he"]
+
+[node name="Tombstone" type="Node3D"]
+
+[node name="tombstone" parent="." instance=ExtResource("1_551he")]

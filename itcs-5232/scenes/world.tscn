@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3tfxx7py1518"]
+[gd_scene load_steps=12 format=3 uid="uid://c3tfxx7py1518"]
 
 [ext_resource type="PackedScene" uid="uid://b4e2ho0fnmaib" path="res://scenes/player.tscn" id="1_ybdjq"]
+[ext_resource type="PackedScene" uid="uid://xtohugsas67j" path="res://scenes/tombstone.tscn" id="2_34gwb"]
 [ext_resource type="PackedScene" uid="uid://uw0e20biq6xo" path="res://models/street_light.glb" id="2_b53rf"]
 [ext_resource type="PackedScene" uid="uid://cka34081fyin3" path="res://models/tower.glb" id="2_f4um8"]
-[ext_resource type="PackedScene" uid="uid://bbskohhj6ijgr" path="res://models/tombstone.glb" id="2_vwfab"]
 [ext_resource type="PackedScene" uid="uid://dh47jhenpais1" path="res://scenes/enemy.tscn" id="4_f6dwh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gkbf7"]
@@ -23,6 +23,10 @@ sky_material = SubResource("ProceduralSkyMaterial_t6aqu")
 background_mode = 1
 background_color = Color(0.0589118, 0.0662506, 0.176449, 1)
 sky = SubResource("Sky_8c4cg")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_e1tp7"]
+vertices = PackedVector3Array(-59.5, 0.5, -8, -13.25, 0.5, -8, -13.25, 0.5, -8.5, -12.5, 0.5, -8.75, -12.5, 0.5, -59.5, -59.5, 0.5, -59.5, -11.25, 0.5, -8.5, -10.75, 0.5, -7.25, -9.5, 0.5, -6.5, 2.75, 0.5, -3.75, 3.25, 0.5, -3.75, 6.5, 0.5, -6, 6.5, 0.5, -7, 7.5, 0.5, -7.25, 7.5, 0.5, -59.5, 8.5, 0.5, -7, 9, 0.5, -6, 12, 0.5, -2, 13.5, 0.5, -1.75, 59.5, 0.5, 17.5, 59.5, 0.5, -59.5, 14, 0.5, -0.5, 18.75, 0.5, 12.75, 20.75, 0.5, 12, 24.75, 0.5, 12.75, 26.5, 0.5, 14.5, 27.25, 0.5, 17.5, -9.5, 0.5, 3, -11.5, 0.5, -6.5, -13, 0.5, -7, -59.5, 0.5, 3.25, -8.25, 0.5, 3.75, -7.75, 0.5, 3.25, -6.5, 0.5, 3.5, 2.25, 0.5, -2.5, 2.25, 0.5, -3.5, 3.75, 0.5, -3.5, 7.25, 0.5, -5.25, 11.5, 0.5, -0.75, 3.75, 0.5, -2.5, 3, 0.5, -2.25, 4, 0.5, 8, 4.5, 0.5, 8.75, 12.25, 0.5, -0.25, 11.5, 0.5, -1.75, 8.5, 0.5, -5.25, 3, 0.5, 7.75, -5.75, 0.5, 4.75, 2.75, 0.5, 7.75, -5.75, 0.5, 4, 15, 0.5, 11.25, 18.25, 0.5, 13, 13.75, 0.5, 0, 4.5, 0.5, 9.25, -7.75, 0.5, 5, -3.75, 0.5, 12.75, -6.25, 0.5, 5.25, -3.25, 0.5, 13.75, -59.5, 0.5, 59.5, -2.25, 0.5, 59.5, -2.25, 0.5, 14, -1.25, 0.5, 12.75, 3, 0.5, 9.75, 2, 0.5, 9, -2, 0.5, 12, -3.25, 0.5, 12, 2, 0.5, 8.25, 16.75, 0.5, 14.75, 3.75, 0.5, 10, 18, 0.5, 21.25, 18.5, 0.5, 20.5, 17.75, 0.5, 19, 16, 0.5, 18.75, 21.5, 0.5, 59.5, 21.5, 0.5, 23.25, 19.75, 0.5, 23.25, 18.25, 0.5, 22.5, -1.25, 0.5, 13.75, 16, 0.5, 16, 18.25, 0.5, 18.75, 19.5, 0.5, 20.25, 20.5, 0.5, 21, 22.75, 0.5, 21, 25, 0.5, 18.5, 24.5, 0.5, 15.75, 20.25, 0.5, 14.5, 18.75, 0.5, 15.75, 18.25, 0.5, 16.75, 24, 0.5, 20.25, 22.25, 0.5, 14.25, 26.75, 0.5, 20.5, 25, 0.5, 22.5, 23.25, 0.5, 23.25, 59.5, 0.5, 59.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(8, 7, 6), PackedInt32Array(10, 9, 11), PackedInt32Array(11, 9, 12), PackedInt32Array(12, 9, 8), PackedInt32Array(12, 8, 6), PackedInt32Array(12, 6, 13), PackedInt32Array(13, 6, 3), PackedInt32Array(13, 3, 4), PackedInt32Array(13, 4, 14), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 18), PackedInt32Array(18, 15, 19), PackedInt32Array(19, 15, 14), PackedInt32Array(19, 14, 20), PackedInt32Array(23, 22, 21), PackedInt32Array(21, 18, 23), PackedInt32Array(23, 18, 24), PackedInt32Array(15, 13, 14), PackedInt32Array(24, 18, 25), PackedInt32Array(25, 18, 19), PackedInt32Array(19, 26, 25), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 30), PackedInt32Array(29, 30, 0), PackedInt32Array(0, 1, 29), PackedInt32Array(31, 27, 32), PackedInt32Array(32, 27, 8), PackedInt32Array(8, 27, 28), PackedInt32Array(8, 28, 7), PackedInt32Array(32, 8, 33), PackedInt32Array(33, 8, 34), PackedInt32Array(34, 8, 35), PackedInt32Array(8, 9, 35), PackedInt32Array(10, 11, 36), PackedInt32Array(36, 11, 37), PackedInt32Array(39, 38, 40), PackedInt32Array(40, 38, 43), PackedInt32Array(40, 43, 41), PackedInt32Array(41, 43, 42), PackedInt32Array(36, 37, 39), PackedInt32Array(39, 37, 45), PackedInt32Array(39, 45, 44), PackedInt32Array(39, 44, 38), PackedInt32Array(44, 45, 17), PackedInt32Array(17, 45, 16), PackedInt32Array(41, 46, 40), PackedInt32Array(48, 47, 46), PackedInt32Array(46, 47, 49), PackedInt32Array(49, 33, 46), PackedInt32Array(46, 33, 34), PackedInt32Array(46, 34, 40), PackedInt32Array(51, 50, 22), PackedInt32Array(22, 50, 52), PackedInt32Array(22, 52, 21), PackedInt32Array(53, 42, 50), PackedInt32Array(50, 42, 43), PackedInt32Array(50, 43, 52), PackedInt32Array(27, 31, 54), PackedInt32Array(54, 56, 55), PackedInt32Array(54, 55, 57), PackedInt32Array(54, 57, 27), PackedInt32Array(27, 57, 59), PackedInt32Array(27, 59, 30), PackedInt32Array(30, 59, 58), PackedInt32Array(57, 60, 59), PackedInt32Array(64, 63, 61), PackedInt32Array(61, 63, 62), PackedInt32Array(65, 55, 56), PackedInt32Array(63, 64, 66), PackedInt32Array(66, 64, 65), PackedInt32Array(66, 65, 56), PackedInt32Array(66, 56, 47), PackedInt32Array(47, 48, 66), PackedInt32Array(51, 67, 50), PackedInt32Array(50, 67, 53), PackedInt32Array(53, 67, 68), PackedInt32Array(70, 69, 71), PackedInt32Array(71, 69, 72), PackedInt32Array(75, 74, 73), PackedInt32Array(69, 76, 72), PackedInt32Array(72, 76, 77), PackedInt32Array(77, 76, 60), PackedInt32Array(62, 68, 61), PackedInt32Array(61, 68, 77), PackedInt32Array(77, 68, 78), PackedInt32Array(77, 78, 72), PackedInt32Array(76, 75, 60), PackedInt32Array(60, 75, 73), PackedInt32Array(60, 73, 59), PackedInt32Array(68, 67, 78), PackedInt32Array(71, 79, 70), PackedInt32Array(70, 79, 80), PackedInt32Array(81, 79, 82), PackedInt32Array(82, 79, 83), PackedInt32Array(83, 79, 84), PackedInt32Array(84, 79, 85), PackedInt32Array(86, 85, 87), PackedInt32Array(87, 85, 79), PackedInt32Array(81, 80, 79), PackedInt32Array(83, 88, 82), PackedInt32Array(85, 89, 84), PackedInt32Array(90, 26, 19), PackedInt32Array(91, 90, 19), PackedInt32Array(73, 74, 92), PackedInt32Array(91, 19, 92), PackedInt32Array(92, 19, 73), PackedInt32Array(73, 19, 93)]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qifvq"]
 height = 6.50565
@@ -47,58 +51,49 @@ light_energy = 0.01
 shadow_enabled = true
 sky_mode = 1
 
-[node name="Floor" type="CSGBox3D" parent="."]
+[node name="NavRegion" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_e1tp7")
+
+[node name="Floor" type="CSGBox3D" parent="NavRegion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
 size = Vector3(120, 1, 120)
 
-[node name="Player" parent="." instance=ExtResource("1_ybdjq")]
+[node name="Tombstone" parent="NavRegion" instance=ExtResource("2_34gwb")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 12.7376, 0, -1.01327)
 
-[node name="Node3D" type="Node" parent="."]
+[node name="Tombstone2" parent="NavRegion" instance=ExtResource("2_34gwb")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -2.40234, 9.53674e-07, 12.9887)
 
-[node name="tombstone" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0, 0, -3.50887)
+[node name="Tombstone3" parent="NavRegion" instance=ExtResource("2_34gwb")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -12.014, 0, -7.67668)
 
-[node name="tombstone2" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 2.5114, 0, -9.23486)
+[node name="Tombstone4" parent="NavRegion" instance=ExtResource("2_34gwb")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3.30591, 9.53674e-07, 8.81016)
 
-[node name="tombstone3" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -12.6575, 0, -4.8148)
+[node name="Tombstone5" parent="NavRegion" instance=ExtResource("2_34gwb")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -7.00582, 9.53674e-07, 4.24351)
 
-[node name="tombstone4" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -13.0593, 0, 3.4226)
+[node name="Tombstone6" parent="NavRegion" instance=ExtResource("2_34gwb")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 7.63803, 9.53674e-07, -6.22982)
 
-[node name="tombstone5" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -5.72599, 0, 7.64175)
+[node name="tower" parent="NavRegion" instance=ExtResource("2_f4um8")]
+transform = Transform3D(0.854685, 0, 0.519146, 0, 1, 0, -0.519146, 0, 0.854685, 21.5963, -9.53674e-07, 17.7103)
 
-[node name="tombstone6" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 11.7534, 0, -4.11161)
+[node name="OmniLight3D" type="OmniLight3D" parent="NavRegion/tower"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.548183, 2.88243, -0.203741)
+light_color = Color(1, 0.7, 0, 1)
+shadow_enabled = true
+shadow_bias = 0.3
+omni_range = 10.5268
 
-[node name="tombstone7" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 2.75336, 0, 0.888393)
-
-[node name="tombstone8" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 7.77616, 0, 15.0527)
-
-[node name="tombstone9" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 14.7762, 0, 10.0527)
-
-[node name="tombstone10" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -11.6438, 0, 12.765)
-
-[node name="tombstone11" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -9.73512, 0, -11.9472)
-
-[node name="tombstone12" parent="Node3D" instance=ExtResource("2_vwfab")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 9.35154, 0, -10.8422)
-
-[node name="StreetLight" type="StaticBody3D" parent="."]
+[node name="StreetLight" type="StaticBody3D" parent="NavRegion"]
 transform = Transform3D(0.726119, 0, -0.687569, 0, 1, 0, 0.687569, 0, 0.726119, 3, 3.10327, -3)
 
-[node name="street_light" parent="StreetLight" instance=ExtResource("2_b53rf")]
+[node name="street_light" parent="NavRegion/StreetLight" instance=ExtResource("2_b53rf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.10327, 0)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="StreetLight/street_light"]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavRegion/StreetLight/street_light"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6, 1.5)
 light_color = Color(0.622777, 0.661037, 0.825404, 1)
 light_energy = 3.0
@@ -107,21 +102,10 @@ shadow_bias = 0.3
 spot_range = 15.0177
 spot_angle = 66.0938
 
-[node name="Collider" type="CollisionShape3D" parent="StreetLight"]
+[node name="Collider" type="CollisionShape3D" parent="NavRegion/StreetLight"]
 shape = SubResource("CylinderShape3D_qifvq")
 
-[node name="tower" parent="." instance=ExtResource("2_f4um8")]
-transform = Transform3D(0.854685, 0, 0.519146, 0, 1, 0, -0.519146, 0, 0.854685, 21.5963, -9.53674e-07, 17.7103)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="tower"]
-transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.548183, 2.88243, -0.203741)
-light_color = Color(1, 0.7, 0, 1)
-shadow_enabled = true
-shadow_bias = 0.3
-omni_range = 10.5268
+[node name="Player" parent="." instance=ExtResource("1_ybdjq")]
 
 [node name="Enemy" parent="." instance=ExtResource("4_f6dwh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61893, 0, -5.69247)
-
-[node name="Enemy2" parent="." instance=ExtResource("4_f6dwh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.202, 3.8147e-06, 16.892)
