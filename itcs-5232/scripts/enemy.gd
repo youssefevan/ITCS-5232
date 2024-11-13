@@ -2,8 +2,10 @@ extends CharacterBody3D
 
 @onready var mesh = $Mesh
 
-var speed = 100
+var speed = 250
 var frame = 0
+
+var health := 3
 
 # navigation setup
 @onready var nav_agent = $NavigationAgent3D
@@ -39,4 +41,11 @@ func _physics_process(delta):
 	
 	velocity = direction * speed * delta
 	position.y = 0
+	
+	handle_death()
+	
 	move_and_slide()
+
+func handle_death():
+	if health <= 0:
+		call_deferred("queue_free")

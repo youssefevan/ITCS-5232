@@ -7,10 +7,10 @@ var rotatation_speed = 15
 
 func _ready():
 	await get_tree().create_timer(5).timeout
-	call_deferred("queue_free")
+	call_deferred("queue_free") 
 
-func _physics_process(delta):
-	rotation.x += rotatation_speed * delta
+func _process(delta):
+	$arrow.rotation.x += rotatation_speed * delta
 	position += transform.basis * Vector3(speed, 0, 0) * delta
 
 func _on_body_entered(body):
@@ -20,6 +20,7 @@ func _on_body_entered(body):
 		call_deferred("disable_collision")
 	
 	elif body.get_collision_layer_value(3):
+		body.health -= 1
 		call_deferred("queue_free")
 
 func disable_collision():
