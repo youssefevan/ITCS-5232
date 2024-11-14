@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://hr2ac2gy54pa"
-path="res://.godot/imported/pond.blend-2edaccb4739de19c526fd5b352806095.scn"
+uid="uid://blocxpe303ut2"
+path="res://.godot/imported/statue.blend-fce3ee0ad67b571228baabd7e1393db1.scn"
 
 [deps]
 
-source_file="res://models/pond.blend"
-dest_files=["res://.godot/imported/pond.blend-2edaccb4739de19c526fd5b352806095.scn"]
+source_file="res://models/structures/statue.blend"
+dest_files=["res://.godot/imported/statue.blend-fce3ee0ad67b571228baabd7e1393db1.scn"]
 
 [params]
 

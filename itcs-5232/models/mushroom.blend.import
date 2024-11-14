@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://blocxpe303ut2"
-path="res://.godot/imported/statue.blend-860bd9fc0855dce4ad17ea4dd2e403c9.scn"
+uid="uid://c76wa7hst164u"
+path="res://.godot/imported/mushroom.blend-a57ab8b04ae4d957a94943768da769e6.scn"
 
 [deps]
 
-source_file="res://models/statue.blend"
-dest_files=["res://.godot/imported/statue.blend-860bd9fc0855dce4ad17ea4dd2e403c9.scn"]
+source_file="res://models/mushroom.blend"
+dest_files=["res://.godot/imported/mushroom.blend-a57ab8b04ae4d957a94943768da769e6.scn"]
 
 [params]
 

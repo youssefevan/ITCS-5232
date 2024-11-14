@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b2ih652ywiqgh"
-path="res://.godot/imported/structure1.glb-dc8dc32ba442e9b45898df8dfbd28277.scn"
+uid="uid://dt6w6kest45nb"
+path="res://.godot/imported/pond.glb-77ea88bb9ce9e695002eaa661fa30162.scn"
 
 [deps]
 
-source_file="res://models/structure1.glb"
-dest_files=["res://.godot/imported/structure1.glb-dc8dc32ba442e9b45898df8dfbd28277.scn"]
+source_file="res://models/structures/pond.glb"
+dest_files=["res://.godot/imported/pond.glb-77ea88bb9ce9e695002eaa661fa30162.scn"]
 
 [params]
 

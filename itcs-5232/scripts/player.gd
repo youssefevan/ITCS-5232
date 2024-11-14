@@ -36,6 +36,7 @@ func _physics_process(delta):
 func handle_shooting():
 	if Input.is_action_pressed("shoot"):
 		if can_shoot:
+			$Animator.play("Recoil")
 			var arrow = arrow_scene.instantiate()
 			arrow.position = $Model/Bow/ArrowPos.global_position
 			arrow.rotation.y = $Model/Bow/ArrowPos.global_rotation.y + (PI/2)
@@ -64,3 +65,6 @@ func handle_aim():
 		# lock x and z axis
 		$Model.rotation.x = 0
 		$Model.rotation.z = 0
+
+func collect_powerup():
+	fire_rate = 0.2

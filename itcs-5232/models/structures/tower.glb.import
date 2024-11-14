@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c2m3cd6623rdl"
-path="res://.godot/imported/statue.glb-ded4f3055de3c4fcc8fa46722388b9a9.scn"
+uid="uid://cka34081fyin3"
+path="res://.godot/imported/tower.glb-c5505cb5829739e37a42ecf6a248b7a3.scn"
 
 [deps]
 
-source_file="res://models/statue.glb"
-dest_files=["res://.godot/imported/statue.glb-ded4f3055de3c4fcc8fa46722388b9a9.scn"]
+source_file="res://models/structures/tower.glb"
+dest_files=["res://.godot/imported/tower.glb-c5505cb5829739e37a42ecf6a248b7a3.scn"]
 
 [params]
 

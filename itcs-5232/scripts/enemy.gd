@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var mesh = $Mesh
 
-var speed = 250
+var speed = 300
 var frame = 0
 
 var health := 3

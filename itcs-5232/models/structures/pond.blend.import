@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bwy6dqhm5urd5"
-path="res://.godot/imported/house.blend-9434b2ae11d6de1288e805b36f9d1b06.scn"
+uid="uid://hr2ac2gy54pa"
+path="res://.godot/imported/pond.blend-83cc2730f22eaf7874f9fba6a47f6ffa.scn"
 
 [deps]
 
-source_file="res://models/house.blend"
-dest_files=["res://.godot/imported/house.blend-9434b2ae11d6de1288e805b36f9d1b06.scn"]
+source_file="res://models/structures/pond.blend"
+dest_files=["res://.godot/imported/pond.blend-83cc2730f22eaf7874f9fba6a47f6ffa.scn"]
 
 [params]
 
