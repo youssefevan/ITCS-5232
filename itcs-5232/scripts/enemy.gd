@@ -48,4 +48,5 @@ func _physics_process(delta):
 
 func handle_death():
 	if health <= 0:
+		World.bones += 200
 		call_deferred("queue_free")

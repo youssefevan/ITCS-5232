@@ -3,16 +3,20 @@
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_mqtny"]
 [ext_resource type="PackedScene" uid="uid://dlcnry3qgtjdt" path="res://models/enemy.glb" id="1_w0wfr"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ol8ds"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6vg4r"]
+radius = 0.389527
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 5
+floor_constant_speed = true
+floor_max_angle = 0.872665
+floor_snap_length = 0.3
 script = ExtResource("1_mqtny")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CylinderShape3D_ol8ds")
+shape = SubResource("CylinderShape3D_6vg4r")
 
 [node name="Mesh" type="Node3D" parent="."]
 

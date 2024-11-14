@@ -1,6 +1,6 @@
 extends Area3D
 
-var speed = 25
+var speed = 30
 var rotatation_speed = 15
 
 @onready var arrow_mesh_scene = preload("res://models/arrow.glb")

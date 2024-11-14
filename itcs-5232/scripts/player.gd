@@ -9,14 +9,19 @@ var input_dir : Vector3
 var fire_rate = 0.3
 var can_shoot := true
 
-var gravity = 200
+const MAX_HEALTH = 10
+var current_health
 
 @onready var arrow_scene = preload("res://scenes/arrow.tscn")
+
+func _ready():
+	current_health = MAX_HEALTH
 
 func _physics_process(delta):
 	handle_aim()
 	handle_shooting()
-	apply_gravity(delta)
+	
+	World.player_health = current_health
 	
 	input_dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input_dir.z = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -27,9 +32,6 @@ func _physics_process(delta):
 	velocity = SPEED * input_dir * delta
 	
 	move_and_slide()
-	
-func apply_gravity(delta):
-	velocity.y += gravity * delta
 
 func handle_shooting():
 	if Input.is_action_pressed("shoot"):
