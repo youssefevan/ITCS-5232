@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3tfxx7py1518"]
+[gd_scene load_steps=13 format=3 uid="uid://c3tfxx7py1518"]
 
 [ext_resource type="PackedScene" uid="uid://b4e2ho0fnmaib" path="res://scenes/player.tscn" id="1_ybdjq"]
 [ext_resource type="PackedScene" uid="uid://xtohugsas67j" path="res://scenes/tombstone.tscn" id="2_34gwb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dh47jhenpais1" path="res://scenes/enemy.tscn" id="4_f6dwh"]
 [ext_resource type="PackedScene" uid="uid://b2ih652ywiqgh" path="res://models/structure1.glb" id="4_gv66e"]
 [ext_resource type="PackedScene" uid="uid://cjqb3ixswgjed" path="res://models/house.glb" id="4_ypdcm"]
+[ext_resource type="PackedScene" uid="uid://dt6w6kest45nb" path="res://models/pond.glb" id="5_g8akj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gkbf7"]
 size = Vector3(1000, 1, 1000)
@@ -89,6 +90,16 @@ transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -19.0865, 
 
 [node name="house" parent="NavRegion" instance=ExtResource("4_ypdcm")]
 transform = Transform3D(0.644164, 0, -0.764888, 0, 1, 0, 0.764888, 0, 0.644164, -34.7627, 0, 30.8766)
+
+[node name="pond" parent="NavRegion" instance=ExtResource("5_g8akj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4773, 0, -30.4348)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="NavRegion/pond"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.934153, 0)
+light_color = Color(0, 1, 1, 1)
+shadow_enabled = true
+shadow_bias = 0.3
+omni_range = 6.98327
 
 [node name="Player" parent="." instance=ExtResource("1_ybdjq")]
 
