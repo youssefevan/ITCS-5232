@@ -27,17 +27,23 @@ shape = SubResource("CylinderShape3D_6vg4r")
 [node name="enemy" parent="Mesh" instance=ExtResource("2_cvg5x")]
 
 [node name="Skeleton3D" parent="Mesh/enemy/Armature" index="0"]
-bones/1/rotation = Quaternion(1.0878e-07, 6.27174e-08, 0.866324, -0.499482)
-bones/3/rotation = Quaternion(-0.00225165, 0.0128643, 0.984942, -0.172389)
+bones/0/position = Vector3(0.00110486, 0.744097, -0.000523235)
+bones/0/rotation = Quaternion(0.0350873, 0.0115643, -0.00464918, 0.999306)
+bones/1/rotation = Quaternion(-0.632729, -0.158105, 0.263095, -0.710941)
+bones/2/rotation = Quaternion(-0.052445, -0.0828807, 0.23389, 0.967303)
+bones/3/rotation = Quaternion(0.0620791, 0.197813, 0.977149, -0.0468698)
 bones/3/scale = Vector3(0.999998, 1, 1)
-bones/4/rotation = Quaternion(-0.0254015, 2.21736e-06, 0.00322575, 0.999672)
+bones/4/rotation = Quaternion(-0.469615, 1.82691e-06, 0.0596363, 0.880855)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(-1.0878e-07, 6.27174e-08, 0.866324, 0.499482)
-bones/7/rotation = Quaternion(0.00225165, 0.0128643, 0.984942, 0.172389)
+bones/5/rotation = Quaternion(0.401692, 0.417089, 0.577492, 0.575486)
+bones/6/rotation = Quaternion(0.518907, 0.0357421, 0.0466813, 0.852807)
+bones/7/rotation = Quaternion(-0.0917936, 0.38452, 0.918155, 0.0266473)
 bones/7/scale = Vector3(0.999998, 1, 1)
-bones/8/rotation = Quaternion(-0.0254015, -2.21736e-06, -0.00322575, 0.999672)
+bones/8/rotation = Quaternion(-0.423413, -1.89384e-06, -0.0537693, 0.90434)
 bones/8/scale = Vector3(1, 1, 1)
+bones/9/position = Vector3(-0.2, 0.03, 0.182735)
 bones/9/rotation = Quaternion(-0.124154, -0.696122, 0.696122, 0.124154)
+bones/10/position = Vector3(0.2, 0.0349068, -0.136611)
 bones/10/rotation = Quaternion(0.124154, -0.696122, 0.696122, -0.124154)
 bones/11/rotation = Quaternion(-0.121908, 0.696519, 0.696519, -0.121908)
 bones/11/scale = Vector3(1, 1, 1)
@@ -54,6 +60,7 @@ collision_mask = 2
 [node name="Collider" type="CollisionShape3D" parent="MeleeRange"]
 shape = SubResource("CylinderShape3D_1spk1")
 
+[connection signal="animation_finished" from="Mesh/enemy/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="MeleeRange" to="." method="_on_melee_range_body_entered"]
 [connection signal="body_exited" from="MeleeRange" to="." method="_on_melee_range_body_exited"]
 

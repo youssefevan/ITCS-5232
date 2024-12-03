@@ -6,6 +6,7 @@ extends CharacterBody3D
 const SPEED = 300
 var speed = 300
 var frame = 0
+var attacking := false
 
 var health := 3
 
@@ -20,8 +21,6 @@ var look_friction = 5
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
-	animator.get_animation("Walk").loop_mode = Animation.LOOP_LINEAR
-	animator.get_animation("Attack").loop_mode = Animation.LOOP_LINEAR
 	animator.play("Walk")
 	
 
@@ -31,7 +30,7 @@ func _physics_process(delta):
 	if !player:
 		player = get_tree().get_first_node_in_group("Player")
 	
-	if (frame % 8) == 0: # update every 8 frames
+	if (frame % 12) == 0: # update every n frames
 		if global_position.distance_to(player.global_position) < 30:
 			nav_agent.set_target_position(player.global_position)
 		
@@ -57,13 +56,21 @@ func handle_death():
 		World.bones += 200
 		call_deferred("queue_free")
 
-
 func _on_melee_range_body_entered(body):
 	if body.get_collision_layer_value(2):
+		attacking = true
 		speed = 0
 		animator.play("Attack")
 
 func _on_melee_range_body_exited(body):
 	if body.get_collision_layer_value(2):
-		speed = SPEED
-		animator.play("Walk")
+		attacking = false
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "Attack":
+		if !attacking:
+			speed = SPEED
+			animator.play("Walk")
+		else:
+			speed = 0
+			animator.play("Attack")
