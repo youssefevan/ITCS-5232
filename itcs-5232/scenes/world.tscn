@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://b4e2ho0fnmaib" path="res://scenes/player.tscn" id="1_ybdjq"]
 [ext_resource type="PackedScene" uid="uid://xtohugsas67j" path="res://scenes/tombstone.tscn" id="2_34gwb"]
 [ext_resource type="PackedScene" uid="uid://cka34081fyin3" path="res://models/structures/tower.glb" id="2_f4um8"]
+[ext_resource type="PackedScene" uid="uid://gtcru51f0q77" path="res://scenes/enemy_spawner.tscn" id="3_mtt87"]
 [ext_resource type="PackedScene" uid="uid://b2ih652ywiqgh" path="res://models/structures/structure1.glb" id="4_gv66e"]
 [ext_resource type="PackedScene" uid="uid://cjqb3ixswgjed" path="res://models/structures/house.glb" id="4_ypdcm"]
 [ext_resource type="PackedScene" uid="uid://c2m3cd6623rdl" path="res://models/structures/statue.glb" id="7_b7wes"]
 [ext_resource type="Script" path="res://scripts/gui.gd" id="8_3yw8m"]
-[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="9_gw8ps"]
 [ext_resource type="PackedScene" uid="uid://dagac4q3yaijg" path="res://scenes/powerup.tscn" id="10_q8gyk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gkbf7"]
@@ -47,17 +47,19 @@ script = ExtResource("8_3yw8m")
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
-offset_right = 95.0
+offset_right = 128.0
 offset_bottom = 39.0
 text = "HP: 10"
+vertical_alignment = 1
 
 [node name="Bones" type="Label" parent="GUI"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 40.0
-offset_right = 95.0
+offset_right = 128.0
 offset_bottom = 63.0
 text = "Bones: 0"
+vertical_alignment = 1
 
 [node name="Wave" type="Label" parent="GUI"]
 layout_mode = 1
@@ -67,15 +69,31 @@ anchor_right = 0.5
 offset_left = -64.0
 offset_top = 16.0
 offset_right = 64.0
-offset_bottom = 64.0
+offset_bottom = 39.0
 grow_horizontal = 2
 text = "Wave: 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EnemySpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1424, -9.53674e-07, -15.1486)
-script = ExtResource("9_gw8ps")
+[node name="Zombies" type="Label" parent="GUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 41.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "Zombies: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_mtt87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0483, 0.263706, -14.676)
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("3_mtt87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.7562, 0.263706, 5.82326)
 
 [node name="CameraPlane" type="Area3D" parent="."]
 collision_layer = 2147483648

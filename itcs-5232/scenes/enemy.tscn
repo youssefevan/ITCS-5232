@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh47jhenpais1"]
+[gd_scene load_steps=6 format=3 uid="uid://dh47jhenpais1"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_mqtny"]
 [ext_resource type="PackedScene" uid="uid://0j3ule6bg4tt" path="res://models/enemy.blend" id="2_cvg5x"]
@@ -6,9 +6,11 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6vg4r"]
 radius = 0.389527
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_xvjjs"]
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1spk1"]
 height = 0.55852
-radius = 0.935157
+radius = 1.0801
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 4
@@ -27,28 +29,37 @@ shape = SubResource("CylinderShape3D_6vg4r")
 [node name="enemy" parent="Mesh" instance=ExtResource("2_cvg5x")]
 
 [node name="Skeleton3D" parent="Mesh/enemy/Armature" index="0"]
-bones/0/position = Vector3(0.00110486, 0.744097, -0.000523235)
-bones/0/rotation = Quaternion(0.0350873, 0.0115643, -0.00464918, 0.999306)
-bones/1/rotation = Quaternion(-0.632729, -0.158105, 0.263095, -0.710941)
+bones/0/position = Vector3(2.72385e-17, 0.655248, 6.04817e-33)
+bones/0/rotation = Quaternion(0.173648, -1.25991e-24, -3.85576e-17, 0.984808)
+bones/1/rotation = Quaternion(-0.63744, -0.150354, 0.250005, -0.713135)
 bones/2/rotation = Quaternion(-0.052445, -0.0828807, 0.23389, 0.967303)
-bones/3/rotation = Quaternion(0.0620791, 0.197813, 0.977149, -0.0468698)
+bones/3/rotation = Quaternion(0.0948581, 0.630921, 0.770018, 0.00358896)
 bones/3/scale = Vector3(0.999998, 1, 1)
-bones/4/rotation = Quaternion(-0.469615, 1.82691e-06, 0.0596363, 0.880855)
+bones/4/rotation = Quaternion(-0.368679, 1.9694e-06, 0.0468189, 0.928377)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(0.401692, 0.417089, 0.577492, 0.575486)
-bones/6/rotation = Quaternion(0.518907, 0.0357421, 0.0466813, 0.852807)
-bones/7/rotation = Quaternion(-0.0917936, 0.38452, 0.918155, 0.0266473)
+bones/5/rotation = Quaternion(0.400453, 0.434073, 0.554227, 0.586558)
+bones/6/rotation = Quaternion(0.233526, 0.168563, -0.0402852, 0.956781)
+bones/7/rotation = Quaternion(-0.106568, 0.128841, 0.984, 0.0615401)
 bones/7/scale = Vector3(0.999998, 1, 1)
-bones/8/rotation = Quaternion(-0.423413, -1.89384e-06, -0.0537693, 0.90434)
+bones/8/rotation = Quaternion(-0.445411, -1.86253e-06, -0.0565631, 0.893538)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/position = Vector3(-0.2, 0.03, 0.182735)
+bones/9/position = Vector3(-0.2, 0.0427272, -0.396888)
 bones/9/rotation = Quaternion(-0.124154, -0.696122, 0.696122, 0.124154)
-bones/10/position = Vector3(0.2, 0.0349068, -0.136611)
+bones/10/position = Vector3(0.2, 0.0349068, 0.413597)
 bones/10/rotation = Quaternion(0.124154, -0.696122, 0.696122, -0.124154)
 bones/11/rotation = Quaternion(-0.121908, 0.696519, 0.696519, -0.121908)
 bones/11/scale = Vector3(1, 1, 1)
 bones/12/rotation = Quaternion(0.121908, 0.696519, 0.696519, 0.121908)
 bones/12/scale = Vector3(1, 1, 1)
+
+[node name="Hitbox" type="Area3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03716, 0.734878)
+collision_layer = 4
+collision_mask = 2
+
+[node name="Collider" type="CollisionShape3D" parent="Mesh/Hitbox"]
+shape = SubResource("SphereShape3D_xvjjs")
+disabled = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -61,6 +72,7 @@ collision_mask = 2
 shape = SubResource("CylinderShape3D_1spk1")
 
 [connection signal="animation_finished" from="Mesh/enemy/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="Mesh/Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="MeleeRange" to="." method="_on_melee_range_body_entered"]
 [connection signal="body_exited" from="MeleeRange" to="." method="_on_melee_range_body_exited"]
 
