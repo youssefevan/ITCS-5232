@@ -39,8 +39,8 @@ script = ExtResource("1_68dpf")
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 648.0
 script = ExtResource("8_3yw8m")
 
 [node name="HP" type="Label" parent="GUI"]
@@ -58,6 +58,20 @@ offset_top = 40.0
 offset_right = 95.0
 offset_bottom = 63.0
 text = "Bones: 0"
+
+[node name="Wave" type="Label" parent="GUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "Wave: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EnemySpawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1424, -9.53674e-07, -15.1486)

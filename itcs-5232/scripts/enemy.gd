@@ -1,7 +1,9 @@
 extends CharacterBody3D
 
 @onready var mesh = $Mesh
+@onready var animator = $Mesh/enemy/AnimationPlayer
 
+const SPEED = 300
 var speed = 300
 var frame = 0
 
@@ -18,6 +20,10 @@ var look_friction = 5
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
+	animator.get_animation("Walk").loop_mode = Animation.LOOP_LINEAR
+	animator.get_animation("Attack").loop_mode = Animation.LOOP_LINEAR
+	animator.play("Walk")
+	
 
 func _physics_process(delta):
 	frame += 1
@@ -50,3 +56,14 @@ func handle_death():
 	if health <= 0:
 		World.bones += 200
 		call_deferred("queue_free")
+
+
+func _on_melee_range_body_entered(body):
+	if body.get_collision_layer_value(2):
+		speed = 0
+		animator.play("Attack")
+
+func _on_melee_range_body_exited(body):
+	if body.get_collision_layer_value(2):
+		speed = SPEED
+		animator.play("Walk")
