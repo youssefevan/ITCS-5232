@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3fthf4hgp2kt"]
+
+[ext_resource type="PackedScene" uid="uid://dh47jhenpais1" path="res://scenes/enemy.tscn" id="1_3yqdo"]
+
+[node name="EnemyFast" instance=ExtResource("1_3yqdo")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
+max_speed = 500
+anim_speed_walk = 2.0
+
+[editable path="Mesh/enemy"]

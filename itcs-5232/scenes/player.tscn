@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b4e2ho0fnmaib"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nu5ra"]
-[ext_resource type="PackedScene" uid="uid://clk43ptq2pmjp" path="res://models/player.glb" id="2_ac86d"]
+[ext_resource type="PackedScene" uid="uid://fbdihai0segm" path="res://models/player.blend" id="2_tlsqd"]
 [ext_resource type="PackedScene" uid="uid://cka7q4e2p2qtu" path="res://models/bow.glb" id="3_offc5"]
 
 [sub_resource type="Animation" id="Animation_y0gk4"]
@@ -48,6 +48,7 @@ _data = {
 collision_layer = 2
 collision_mask = 21
 floor_constant_speed = true
+floor_max_angle = 0.872665
 floor_snap_length = 0.3
 script = ExtResource("1_nu5ra")
 
@@ -59,8 +60,32 @@ libraries = {
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
-[node name="player" parent="Model" instance=ExtResource("2_ac86d")]
+[node name="player" parent="Model" instance=ExtResource("2_tlsqd")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.25, 0)
+
+[node name="Skeleton3D" parent="Model/player/Armature" index="0"]
+bones/0/position = Vector3(-3.92235e-18, 0.776447, -0.0942117)
+bones/0/rotation = Quaternion(0.0816935, -1.03744e-25, -1.81396e-17, 0.996657)
+bones/1/rotation = Quaternion(-0.0814216, -0.0315436, 0.952393, -0.2921)
+bones/2/rotation = Quaternion(0.465744, -0.151448, -0.0723757, 0.868854)
+bones/3/rotation = Quaternion(0.0637486, 0.370016, 0.92606, -0.0379098)
+bones/3/scale = Vector3(0.999998, 1, 1)
+bones/4/rotation = Quaternion(-0.2535, 2.10188e-06, 0.032192, 0.9668)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/rotation = Quaternion(-0.0171099, -0.12028, 0.979115, 0.163016)
+bones/6/rotation = Quaternion(0.672521, -0.00348255, -0.0917513, 0.734361)
+bones/7/rotation = Quaternion(-0.0622107, 0.202352, 0.975921, 0.0525485)
+bones/7/scale = Vector3(0.999998, 1, 1)
+bones/8/rotation = Quaternion(-0.3684, -1.96788e-06, -0.046783, 0.92849)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/position = Vector3(-0.223353, 0.03, -0.211976)
+bones/9/rotation = Quaternion(-0.124154, -0.696122, 0.696122, 0.124154)
+bones/10/position = Vector3(0.223353, 0.03, 0.141318)
+bones/10/rotation = Quaternion(0.124154, -0.696122, 0.696122, -0.124154)
+bones/11/rotation = Quaternion(-0.121908, 0.696519, 0.696519, -0.121908)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/rotation = Quaternion(0.121908, 0.696519, 0.696519, 0.121908)
+bones/12/scale = Vector3(1, 1, 1)
 
 [node name="Bow" parent="Model" instance=ExtResource("3_offc5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.8)
@@ -75,3 +100,5 @@ shape = SubResource("CylinderShape3D_68y0l")
 transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 11.75, 9.5)
 projection = 1
 size = 20.0
+
+[editable path="Model/player"]

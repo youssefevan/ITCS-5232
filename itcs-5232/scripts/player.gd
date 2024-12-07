@@ -23,7 +23,12 @@ func _physics_process(delta):
 	
 	velocity = SPEED * input_dir * delta
 	
+	handle_death()
 	move_and_slide()
+
+func handle_death():
+	if World.player_health <= 0:
+		pass
 
 func handle_shooting():
 	if Input.is_action_pressed("shoot"):

@@ -4,12 +4,17 @@ extends CharacterBody3D
 @onready var animator = $Mesh/enemy/AnimationPlayer
 @onready var hitbox_collider = $Mesh/Hitbox/Collider
 
-const SPEED = 300
-var speed = 300
+@export var max_speed = 325
+var speed
 var frame = 0
 var player_in_range := false
 
-var health := 3
+@export var anim_speed_walk = 1.0
+@export var anim_speed_attack = 1.2
+
+@export var health := 2
+
+@export var bones := 1
 
 # navigation setup
 @onready var nav_agent = $NavigationAgent3D
@@ -20,9 +25,15 @@ var local_destination = Vector3.ZERO
 var look_angle = 0
 var look_friction = 5
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
+	speed = max_speed
+	rng.randomize()
 	player = get_tree().get_first_node_in_group("Player")
+	animator.speed_scale = anim_speed_walk;
 	animator.play("Walk")
+	animator.seek(rng.randf_range(0, animator.current_animation_length))
 
 func _physics_process(delta):
 	frame += 1
@@ -31,8 +42,7 @@ func _physics_process(delta):
 		player = get_tree().get_first_node_in_group("Player")
 	
 	if (frame % 12) == 0: # update every n frames
-		if global_position.distance_to(player.global_position) < 30:
-			nav_agent.set_target_position(player.global_position)
+		nav_agent.set_target_position(player.global_position)
 		
 		destination = nav_agent.get_next_path_position()
 		local_destination = destination - global_position
@@ -69,6 +79,7 @@ func _on_melee_range_body_entered(body):
 	if body.get_collision_layer_value(2):
 		player_in_range = true
 		speed = 0
+		animator.speed_scale = anim_speed_attack
 		animator.play("Attack")
 
 func _on_melee_range_body_exited(body):
@@ -78,10 +89,12 @@ func _on_melee_range_body_exited(body):
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "Attack":
 		if !player_in_range:
-			speed = SPEED
+			speed = max_speed
+			animator.speed_scale = anim_speed_walk
 			animator.play("Walk")
 		else:
 			speed = 0
+			animator.speed_scale = anim_speed_attack
 			animator.play("Attack")
 
 func _on_hitbox_body_entered(body):

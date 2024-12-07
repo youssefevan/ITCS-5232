@@ -16,7 +16,7 @@ func new_wave():
 	for spawner in spawners:
 		spawner.start_wave = false
 		if spawner.unlock_wave <= wave:
-			spawner.spawn_amount = 10 + wave
+			spawner.spawn_amount = wave * 3
 			enemies_left += spawner.spawn_amount
 	
 	await get_tree().create_timer(5).timeout
