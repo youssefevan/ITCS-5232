@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dh47jhenpais1"]
+[gd_scene load_steps=7 format=3 uid="uid://dh47jhenpais1"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_mqtny"]
+[ext_resource type="PackedScene" uid="uid://cmvhco8a888yl" path="res://scenes/fire.tscn" id="2_8owd0"]
 [ext_resource type="PackedScene" uid="uid://0j3ule6bg4tt" path="res://models/enemy.blend" id="2_cvg5x"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6vg4r"]
-radius = 0.389527
+radius = 0.453211
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xvjjs"]
 
@@ -19,6 +20,7 @@ floor_constant_speed = true
 floor_max_angle = 0.872665
 floor_snap_length = 0.3
 script = ExtResource("1_mqtny")
+fire_scene = ExtResource("2_8owd0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

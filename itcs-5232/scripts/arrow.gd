@@ -1,7 +1,8 @@
 extends Area3D
 
 var speed = 30
-var rotatation_speed = 15
+
+var on_fire := false
 
 @onready var arrow_mesh_scene = preload("res://models/arrow.glb")
 
@@ -10,7 +11,6 @@ func _ready():
 	call_deferred("queue_free") 
 
 func _process(delta):
-	$arrow.rotation.x += rotatation_speed * delta
 	position += transform.basis * Vector3(speed, 0, 0) * delta
 
 func _on_body_entered(body):
@@ -18,7 +18,7 @@ func _on_body_entered(body):
 		call_deferred("queue_free")
 	
 	elif body.get_collision_layer_value(3):
-		body.health -= 1
+		body.get_hit(on_fire)
 		call_deferred("queue_free")
 
 func disable_collision():

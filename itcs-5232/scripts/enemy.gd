@@ -4,10 +4,14 @@ extends CharacterBody3D
 @onready var animator = $Mesh/enemy/AnimationPlayer
 @onready var hitbox_collider = $Mesh/Hitbox/Collider
 
+@export var fire_scene : PackedScene
+
 @export var max_speed = 325
 var speed
 var frame = 0
 var player_in_range := false
+
+@export var attack_movement_speed := 0.0
 
 @export var anim_speed_walk = 1.0
 @export var anim_speed_attack = 1.2
@@ -15,6 +19,8 @@ var player_in_range := false
 @export var health := 2
 
 @export var bones := 1
+
+@export var drops : Array[PackedScene]
 
 # navigation setup
 @onready var nav_agent = $NavigationAgent3D
@@ -27,8 +33,11 @@ var look_friction = 5
 
 var rng = RandomNumberGenerator.new()
 
+var on_fire := false
+
 func _ready():
 	speed = max_speed
+	health += floor(World.wave/3)
 	rng.randomize()
 	player = get_tree().get_first_node_in_group("Player")
 	animator.speed_scale = anim_speed_walk;
@@ -47,7 +56,10 @@ func _physics_process(delta):
 		destination = nav_agent.get_next_path_position()
 		local_destination = destination - global_position
 		#print(local_destination)
-		
+	
+	if on_fire and (frame % 60) == 0:
+		get_hit(false)
+	
 	direction = local_destination.normalized()
 	
 	look_angle = lerp_angle(look_angle, Vector2(direction.x, direction.z).angle(), look_friction * delta)
@@ -62,10 +74,24 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
+func get_hit(fire_arrow : bool):
+	health -= 1
+	if fire_arrow == true and on_fire == false:
+		catch_fire()
+
 func handle_death():
 	if health <= 0:
 		World.bones += 2
 		World.enemies_left -= 1
+		
+		if len(drops) > 0:
+			var drop_chance = rng.randi_range(0, 3)
+			if drop_chance == 3:
+				var pick_drop = rng.randi_range(0, len(drops)-1)
+				var drop = drops[pick_drop].instantiate()
+				get_parent().add_child(drop)
+				drop.global_position = global_position
+		
 		call_deferred("queue_free")
 		
 func handle_hitbox():
@@ -75,10 +101,17 @@ func handle_hitbox():
 		else:
 			hitbox_collider.disabled = true
 
+func catch_fire():
+	if on_fire == false:
+		var fire = fire_scene.instantiate()
+		add_child(fire)
+		fire.position.y = 0.75
+	on_fire = true
+
 func _on_melee_range_body_entered(body):
 	if body.get_collision_layer_value(2):
 		player_in_range = true
-		speed = 0
+		speed = attack_movement_speed
 		animator.speed_scale = anim_speed_attack
 		animator.play("Attack")
 
@@ -93,7 +126,7 @@ func _on_animation_player_animation_finished(anim_name):
 			animator.speed_scale = anim_speed_walk
 			animator.play("Walk")
 		else:
-			speed = 0
+			speed = attack_movement_speed
 			animator.speed_scale = anim_speed_attack
 			animator.play("Attack")
 

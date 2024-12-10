@@ -32,11 +32,11 @@ func _physics_process(delta):
 		else:
 			location_index = 0
 		
-		var enemy_type = rng.randi_range(0, 30)
+		var enemy_type = rng.randi_range(0, 100)
 		
-		if enemy_type <= 3 and unlock_wave >= 5:
+		if enemy_type <= 15 and unlock_wave >= 5:
 			spawn_enemy_fast()
-		elif enemy_type <= 6 and enemy_type > 3 and unlock_wave >= 3:
+		elif enemy_type <= 30 and enemy_type > 15 and unlock_wave >= 3:
 			spawn_enemy_slow()
 		else:
 			spawn_enemy()
