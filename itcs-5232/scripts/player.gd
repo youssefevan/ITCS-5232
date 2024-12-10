@@ -35,8 +35,8 @@ func handle_shooting():
 		if can_shoot:
 			$Animator.play("Recoil")
 			var arrow = arrow_scene.instantiate()
-			arrow.position = $Model/Bow/ArrowPos.global_position
-			arrow.rotation.y = $Model/Bow/ArrowPos.global_rotation.y + (PI/2)
+			arrow.position = $Model/Bow/Bow/ArrowPos.global_position
+			arrow.rotation.y = $Model/Bow/Bow/ArrowPos.global_rotation.y + (PI/2)
 			get_parent().add_child(arrow)
 			can_shoot = false
 			await get_tree().create_timer(fire_rate).timeout
@@ -57,11 +57,11 @@ func handle_aim():
 		var pos = intersection.position
 		var look_to = Vector3(pos.x, position.y, pos.z)
 		
-		$Model.look_at(look_to, Vector3.UP)
+		$Model/Bow.look_at(look_to, Vector3.UP)
 		
 		# lock x and z axis
-		$Model.rotation.x = 0
-		$Model.rotation.z = 0
+		$Model/Bow.rotation.x = 0
+		$Model/Bow.rotation.z = 0
 
 func collect_powerup():
 	fire_rate = 0.2

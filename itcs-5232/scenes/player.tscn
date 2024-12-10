@@ -9,14 +9,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Model/Bow:position")
+tracks/0/path = NodePath("Model/Bow/Bow:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 1, -0.8)]
+"values": [Vector3(0, 0, -0.25)]
 }
 
 [sub_resource type="Animation" id="Animation_ta56a"]
@@ -26,14 +26,14 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Model/Bow:position")
+tracks/0/path = NodePath("Model/Bow/Bow:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 1, -0.5), Vector3(0, 1, -0.8)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.25)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o7bf6"]
@@ -61,36 +61,30 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
 [node name="player" parent="Model" instance=ExtResource("2_tlsqd")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.25, 0)
+transform = Transform3D(-1.39992, 0.0152469, 2.11394e-07, 0.0152469, 1.39992, -2.30222e-09, -2.11407e-07, 1.36002e-13, -1.4, 0, 0.35, 0)
 
-[node name="Skeleton3D" parent="Model/player/Armature" index="0"]
-bones/0/position = Vector3(-3.92235e-18, 0.776447, -0.0942117)
-bones/0/rotation = Quaternion(0.0816935, -1.03744e-25, -1.81396e-17, 0.996657)
-bones/1/rotation = Quaternion(-0.0814216, -0.0315436, 0.952393, -0.2921)
-bones/2/rotation = Quaternion(0.465744, -0.151448, -0.0723757, 0.868854)
-bones/3/rotation = Quaternion(0.0637486, 0.370016, 0.92606, -0.0379098)
-bones/3/scale = Vector3(0.999998, 1, 1)
-bones/4/rotation = Quaternion(-0.2535, 2.10188e-06, 0.032192, 0.9668)
-bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(-0.0171099, -0.12028, 0.979115, 0.163016)
-bones/6/rotation = Quaternion(0.672521, -0.00348255, -0.0917513, 0.734361)
-bones/7/rotation = Quaternion(-0.0622107, 0.202352, 0.975921, 0.0525485)
-bones/7/scale = Vector3(0.999998, 1, 1)
-bones/8/rotation = Quaternion(-0.3684, -1.96788e-06, -0.046783, 0.92849)
-bones/8/scale = Vector3(1, 1, 1)
-bones/9/position = Vector3(-0.223353, 0.03, -0.211976)
-bones/9/rotation = Quaternion(-0.124154, -0.696122, 0.696122, 0.124154)
-bones/10/position = Vector3(0.223353, 0.03, 0.141318)
-bones/10/rotation = Quaternion(0.124154, -0.696122, 0.696122, -0.124154)
-bones/11/rotation = Quaternion(-0.121908, 0.696519, 0.696519, -0.121908)
-bones/11/scale = Vector3(1, 1, 1)
-bones/12/rotation = Quaternion(0.121908, 0.696519, 0.696519, 0.121908)
-bones/12/scale = Vector3(1, 1, 1)
+[node name="Bow" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
-[node name="Bow" parent="Model" instance=ExtResource("3_offc5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.8)
+[node name="Bow" parent="Model/Bow" instance=ExtResource("3_offc5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 
-[node name="ArrowPos" type="Node3D" parent="Model/Bow"]
+[node name="ArrowPos" type="Node3D" parent="Model/Bow/Bow"]
+
+[node name="Wheels" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model/Wheels"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.4, 0, 0)
+radius = 0.250265
+height = 0.35
+sides = 16
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Model/Wheels"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.4, 0, 0)
+radius = 0.250265
+height = 0.35
+sides = 16
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

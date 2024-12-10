@@ -15,9 +15,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.get_collision_layer_value(1):
-		speed = 0
-		rotatation_speed = 0
-		call_deferred("disable_collision")
+		call_deferred("queue_free")
 	
 	elif body.get_collision_layer_value(3):
 		body.health -= 1
