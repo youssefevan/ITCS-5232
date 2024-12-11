@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4e2ho0fnmaib"]
+[gd_scene load_steps=8 format=3 uid="uid://b4e2ho0fnmaib"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nu5ra"]
 [ext_resource type="PackedScene" uid="uid://fbdihai0segm" path="res://models/player.blend" id="2_tlsqd"]
@@ -42,13 +42,6 @@ _data = {
 "Recoil": SubResource("Animation_ta56a")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btxty"]
-albedo_color = Color(1, 0.588235, 1, 1)
-roughness = 0.24
-emission_enabled = true
-emission = Color(1, 0.627451, 1, 1)
-emission_energy_multiplier = 0.3
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_68y0l"]
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
@@ -68,13 +61,28 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
 [node name="player" parent="Model" instance=ExtResource("2_tlsqd")]
-transform = Transform3D(-1.39992, 0.0152469, 2.11394e-07, 0.0152469, 1.39992, -2.30222e-09, -2.11407e-07, 1.36002e-13, -1.4, 0, 0.35, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.35, 0)
 
-[node name="Cylinder" parent="Model/player" index="0"]
-surface_material_override/1 = SubResource("StandardMaterial3D_btxty")
+[node name="Skeleton3D" parent="Model/player/Armature" index="0"]
+bones/1/rotation = Quaternion(1.0878e-07, 6.27174e-08, 0.866324, -0.499482)
+bones/3/rotation = Quaternion(-0.00225165, 0.0128643, 0.984942, -0.172389)
+bones/3/scale = Vector3(0.999998, 1, 1)
+bones/4/rotation = Quaternion(-0.0254015, 2.21736e-06, 0.00322575, 0.999672)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/rotation = Quaternion(-1.0878e-07, 6.27174e-08, 0.866324, 0.499482)
+bones/7/rotation = Quaternion(0.00225165, 0.0128643, 0.984942, 0.172389)
+bones/7/scale = Vector3(0.999998, 1, 1)
+bones/8/rotation = Quaternion(-0.0254015, -2.21736e-06, -0.00322575, 0.999672)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(-0.124154, -0.696122, 0.696122, 0.124154)
+bones/10/rotation = Quaternion(0.124154, -0.696122, 0.696122, -0.124154)
+bones/11/rotation = Quaternion(-0.121908, 0.696519, 0.696519, -0.121908)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/rotation = Quaternion(0.121908, 0.696519, 0.696519, 0.121908)
+bones/12/scale = Vector3(1, 1, 1)
 
 [node name="Bow" type="Node3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3141, 0)
 
 [node name="Bow" parent="Model/Bow" instance=ExtResource("3_offc5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
@@ -83,6 +91,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 
 [node name="Wheels" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model/Wheels"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.4, 0, 0)
@@ -106,7 +115,7 @@ projection = 1
 size = 20.0
 
 [node name="FireLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68125, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45874, 0)
 visible = false
 billboard = 1
 font_size = 64

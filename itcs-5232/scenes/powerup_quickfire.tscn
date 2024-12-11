@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://k1n8y1jrnigl"]
+
+[ext_resource type="PackedScene" uid="uid://dagac4q3yaijg" path="res://scenes/powerup.tscn" id="1_8wx27"]
+[ext_resource type="PackedScene" uid="uid://ctdo0apjye8f4" path="res://models/quickfire.blend" id="2_kpb3f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnqkq"]
+albedo_color = Color(1.92523e-07, 0.546484, 0.626296, 1)
+
+[node name="PowerupQuickfire" instance=ExtResource("1_8wx27")]
+type = "quickfire"
+
+[node name="quickfire" parent="." index="3" instance=ExtResource("2_kpb3f")]
+
+[node name="Suzanne" parent="quickfire" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wnqkq")
+
+[editable path="quickfire"]

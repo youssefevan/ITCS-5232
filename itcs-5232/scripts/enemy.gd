@@ -85,8 +85,8 @@ func handle_death():
 		World.enemies_left -= 1
 		
 		if len(drops) > 0:
-			var drop_chance = rng.randi_range(0, 3)
-			if drop_chance == 3:
+			var drop_chance = rng.randi_range(1, 1)
+			if drop_chance == 1:
 				var pick_drop = rng.randi_range(0, len(drops)-1)
 				var drop = drops[pick_drop].instantiate()
 				get_parent().add_child(drop)

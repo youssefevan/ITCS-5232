@@ -3,7 +3,7 @@ extends CharacterBody3D
 var ray_origin = Vector3()
 var ray_target = Vector3()
 
-const SPEED = 400
+var speed = 400
 
 var input_dir : Vector3
 
@@ -14,6 +14,7 @@ var fire_rate_decay := 0.8
 var minimum_fire_rate := 0.03
 
 var fire_rounds := 0
+var ammo_size := 1.0
 
 var can_shoot := true
 
@@ -23,6 +24,7 @@ var base_rotation = 0
 
 func _ready():
 	calculate_fire_rate()
+	$Model/player/AnimationPlayer.play("RunForward")
 
 func calculate_fire_rate():
 	fire_rate = initial_fire_rate*pow(fire_rate_decay, fire_rate_exponent) + minimum_fire_rate
@@ -41,9 +43,9 @@ func _physics_process(delta):
 	if input_dir != Vector3.ZERO:
 		base_rotation = -Vector2(input_dir.x, input_dir.z).angle() + (PI/2)
 		
-	$Model/Wheels.rotation.y = lerp_angle($Model/Wheels.rotation.y, base_rotation, 15 * delta)
+	#$Model/Wheels.rotation.y = lerp_angle($Model/Wheels.rotation.y, base_rotation, 15 * delta)
 	
-	velocity = lerp(velocity, SPEED * input_dir * delta, 10 * delta)
+	velocity = lerp(velocity, speed * input_dir * delta, 10 * delta)
 	
 	handle_death()
 	move_and_slide()
@@ -66,6 +68,7 @@ func handle_shooting():
 					$FireLabel.text = str(fire_rounds)
 				else:
 					$FireLabel.visible = false
+			arrow.scale = Vector3(1, ammo_size, ammo_size)
 			get_parent().add_child(arrow)
 			can_shoot = false
 			await get_tree().create_timer(fire_rate).timeout
@@ -86,21 +89,21 @@ func handle_aim():
 		var pos = intersection.position
 		var look_to = Vector3(pos.x, position.y, pos.z)
 		
-		$Model/Bow.look_at(look_to, Vector3.UP)
-		$Model/player.look_at(look_to, Vector3.UP)
+		$Model.look_at(look_to, Vector3.UP)
 		
 		# lock x and z axis
-		$Model/Bow.rotation.x = 0
-		$Model/Bow.rotation.z = 0
-		
-		$Model/player.rotation.x = 0
-		$Model/player.rotation.z = 0
+		$Model.rotation.x = 0
+		$Model.rotation.z = 0
 
 func collect_powerup(type : String):
-	if type == "mushroom":
+	if type == "quickfire":
 		fire_rate_exponent += 1
 		calculate_fire_rate()
+	elif type == "mushroom":
+		ammo_size += 0.2
 	elif type == "fire":
 		fire_rounds += 1
 		$FireLabel.visible = true
 		$FireLabel.text = str(fire_rounds)
+	elif type == "speed":
+		speed += 50

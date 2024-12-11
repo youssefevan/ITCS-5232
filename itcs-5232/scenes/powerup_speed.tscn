@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://coag02vtbckbd"]
+
+[ext_resource type="PackedScene" uid="uid://dagac4q3yaijg" path="res://scenes/powerup.tscn" id="1_x11ys"]
+[ext_resource type="PackedScene" uid="uid://cr7on6s0dudn0" path="res://models/speed.blend" id="2_wnhu7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mwwjj"]
+albedo_color = Color(1, 0.647059, 0.396078, 1)
+
+[node name="PowerupSpeed" instance=ExtResource("1_x11ys")]
+type = "speed"
+
+[node name="speed" parent="." index="0" instance=ExtResource("2_wnhu7")]
+transform = Transform3D(-4.37114e-08, 0.627963, 0.778243, 0, 0.778243, -0.627963, -1, -2.74491e-08, -3.40181e-08, 0, 0.0478531, 0)
+
+[node name="Cube" parent="speed" index="0"]
+material_override = SubResource("StandardMaterial3D_mwwjj")
+
+[editable path="speed"]

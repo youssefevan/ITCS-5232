@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqlt2onccdu0m"]
+
+[ext_resource type="PackedScene" uid="uid://dagac4q3yaijg" path="res://scenes/powerup.tscn" id="1_rqaju"]
+[ext_resource type="PackedScene" uid="uid://dkapaljdsywm1" path="res://models/mushroom.glb" id="2_or0ug"]
+
+[node name="PowerupMushroom" instance=ExtResource("1_rqaju")]
+type = "mushroom"
+
+[node name="mushroom" parent="." index="3" instance=ExtResource("2_or0ug")]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -0.16, -0.25, 0)

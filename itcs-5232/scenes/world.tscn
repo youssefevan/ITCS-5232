@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c3tfxx7py1518"]
+[gd_scene load_steps=22 format=3 uid="uid://c3tfxx7py1518"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_68dpf"]
 [ext_resource type="PackedScene" uid="uid://b4e2ho0fnmaib" path="res://scenes/player.tscn" id="1_ybdjq"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/rotate.gd" id="10_jpwdn"]
 [ext_resource type="PackedScene" uid="uid://csk22m6mh3245" path="res://models/wall.blend" id="11_nsv8e"]
 [ext_resource type="PackedScene" uid="uid://dqk8t27wrvevq" path="res://models/structures/fence.blend" id="12_klfqn"]
+[ext_resource type="PackedScene" uid="uid://dochigcm8dm41" path="res://scenes/shop.tscn" id="12_plawe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gkbf7"]
 size = Vector3(1000, 1, 1000)
@@ -65,7 +66,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0.196078)
+color = Color(0, 0, 0, 0.494118)
+
+[node name="TextBG" type="ColorRect" parent="Inventory/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -184.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 0.576471)
 
 [node name="Title" type="Label" parent="Inventory/Panel"]
 layout_mode = 1
@@ -113,7 +125,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-text = "400"
+text = "50%"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -121,7 +133,7 @@ vertical_alignment = 1
 process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
-text = "+100 Speed"
+text = "drop rate + 25%"
 
 [node name="TextBG2" type="ColorRect" parent="Inventory/Panel/VBoxContainer/Speed"]
 layout_mode = 2
@@ -139,7 +151,56 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-text = "1000 bones"
+text = "500 bones"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speed2" type="HBoxContainer" parent="Inventory/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextBG" type="ColorRect" parent="Inventory/Panel/VBoxContainer/Speed2"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 1, 1, 0.196078)
+
+[node name="Current" type="Label" parent="Inventory/Panel/VBoxContainer/Speed2/TextBG"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Inventory/Panel/VBoxContainer/Speed2"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+2 max health"
+
+[node name="TextBG2" type="ColorRect" parent="Inventory/Panel/VBoxContainer/Speed2"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 1, 0, 0.196078)
+
+[node name="Price" type="Label" parent="Inventory/Panel/VBoxContainer/Speed2/TextBG2"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "750 bones"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -368,6 +429,9 @@ speed = 0.3
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 5.89203, 0)
 light_color = Color(1, 0.266667, 0.290196, 1)
 omni_range = 3.04349
+
+[node name="Shop" parent="NavRegion/statue2" instance=ExtResource("12_plawe")]
+transform = Transform3D(-0.665139, 0, -0.74672, 0, 1, 0, 0.74672, 0, -0.665139, -0.904962, 0.295489, -19.4924)
 
 [node name="wall" parent="NavRegion" instance=ExtResource("11_nsv8e")]
 transform = Transform3D(0.922538, 0, 0.385906, 0, 1, 0, -0.385906, 0, 0.922538, -34.2361, -1.52588e-05, 16.4531)

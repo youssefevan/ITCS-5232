@@ -2,7 +2,7 @@ extends Area3D
 
 var rotation_speed = PI/2
 
-@export var type := "mushroom"
+@export var type := "temp"
 
 func _ready():
 	$temp.visible = false

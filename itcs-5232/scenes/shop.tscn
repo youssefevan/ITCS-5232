@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dochigcm8dm41"]
+
+[ext_resource type="PackedScene" uid="uid://ckh8cmke4p76" path="res://models/shop.blend" id="1_28qmj"]
+[ext_resource type="Script" path="res://scripts/shop.gd" id="1_fpcd1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_514ru"]
+radius = 2.28939
+
+[node name="Shop" type="Node3D"]
+script = ExtResource("1_fpcd1")
+
+[node name="shop" parent="." instance=ExtResource("1_28qmj")]
+
+[node name="Radius" type="Area3D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Radius"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04237, 1.52336)
+shape = SubResource("SphereShape3D_514ru")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.14131, 0)
+billboard = 1
+text = "E"
+font_size = 128
+
+[connection signal="body_entered" from="Radius" to="." method="_on_radius_body_entered"]
+[connection signal="body_exited" from="Radius" to="." method="_on_radius_body_exited"]

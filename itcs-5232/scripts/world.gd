@@ -7,9 +7,18 @@ var wave := 0
 var spawners = []
 var enemies_left := 0
 
+var in_shop_radius := false
+
 func _ready():
 	for spawner in get_tree().get_nodes_in_group("Spawner"):
 		spawners.append(spawner)
+
+func reset_variables():
+	player_health = 10
+	bones = 0
+	wave = 0
+	enemies_left = 0
+	in_shop_radius = false
 
 func new_wave():
 	wave += 1
