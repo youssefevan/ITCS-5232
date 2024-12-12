@@ -25,10 +25,10 @@ func _ready():
 	$Model/player/AnimationPlayer.play("RunForward")
 
 func calculate_fire_rate():
-	fire_rate *= 0.9
+	fire_rate *= 0.85
 
 func calculate_speed():
-	speed *= 1.03
+	speed *= 1.025
 	$SpeedLabel.visible = true
 	$SpeedLabel.text = str(speed)
 
@@ -66,10 +66,9 @@ func handle_shooting():
 			arrow.position = $Model/Bow/Bow/ArrowPos.global_position
 			arrow.rotation.y = $Model/Bow/Bow/ArrowPos.global_rotation.y + (PI/2)
 			var fire_chance = rng.randf()
-			print(fire_chance)
 			if fire_chance <= fire_round_chance:
 				arrow.on_fire = true
-			arrow.scale = Vector3(ammo_size, ammo_size, ammo_size)
+			arrow.size = ammo_size
 			get_parent().add_child(arrow)
 			can_shoot = false
 			await get_tree().create_timer(fire_rate).timeout

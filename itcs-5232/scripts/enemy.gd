@@ -31,22 +31,30 @@ var local_destination = Vector3.ZERO
 var look_angle = 0
 var look_friction = 5
 
-var path_update_rate := 12
-
 var rng = RandomNumberGenerator.new()
 
 var on_fire := false
 
 var player_distance : float
 
+var spawning := true
+
 func _ready() -> void:
 	speed = max_speed
 	health += floor(World.wave/4)
 	rng.randomize()
 	player = get_tree().get_first_node_in_group("Player")
+	
+	animator.speed_scale = 2;
+	animator.play("Spawn")
+	$CollisionShape3D.disabled = true
+	spawning = true
+	await $Mesh/enemy/AnimationPlayer.animation_finished
+	spawning = false
+	$CollisionShape3D.disabled = false
 	animator.speed_scale = anim_speed_walk;
-	animator.play("Walk")
 	animator.seek(rng.randf_range(0, animator.current_animation_length))
+	$Mesh/enemy/AnimationPlayer.play("Walk")
 
 func _physics_process(delta) -> void:
 	frame += 1
@@ -54,34 +62,35 @@ func _physics_process(delta) -> void:
 	if !player:
 		player = get_tree().get_first_node_in_group("Player")
 	
-	if (frame % 12) == 0: 
-		player_distance = Vector2(global_position.x, global_position.z).distance_to(Vector2(player.global_position.x, player.global_position.z))
-		$Label3D.text = str(int(player_distance))
-	
-	if player_distance < 7:
-		$Label3D.modulate = Color.RED
-		if (frame % 12) == 0: # update every n frames
-			nav_agent.set_target_position(player.global_position)
-			
-			destination = nav_agent.get_next_path_position()
-			local_destination = destination - global_position
-			#print(local_destination)
-	elif player_distance > 15:
-		$Label3D.modulate = Color.WHITE
-		if (frame % 60) == 0: # update every n frames
-			nav_agent.set_target_position(player.global_position)
-			
-			destination = nav_agent.get_next_path_position()
-			local_destination = destination - global_position
-			#print(local_destination)
-	else:
-		$Label3D.modulate = Color.WHITE
-		if (frame % 30) == 0: # update every n frames
-			nav_agent.set_target_position(player.global_position)
-			
-			destination = nav_agent.get_next_path_position()
-			local_destination = destination - global_position
-			#print(local_destination)
+	if !spawning:
+		if (frame % 12) == 0: 
+			player_distance = Vector2(global_position.x, global_position.z).distance_to(Vector2(player.global_position.x, player.global_position.z))
+			$Label3D.text = str(int(player_distance))
+		
+		if player_distance < 7:
+			$Label3D.modulate = Color.RED
+			if (frame % 12) == 0: # update every n frames
+				nav_agent.set_target_position(player.global_position)
+				
+				destination = nav_agent.get_next_path_position()
+				local_destination = destination - global_position
+				#print(local_destination)
+		elif player_distance > 15:
+			$Label3D.modulate = Color.WHITE
+			if (frame % 60) == 0: # update every n frames
+				nav_agent.set_target_position(player.global_position)
+				
+				destination = nav_agent.get_next_path_position()
+				local_destination = destination - global_position
+				#print(local_destination)
+		else:
+			$Label3D.modulate = Color.WHITE
+			if (frame % 30) == 0: # update every n frames
+				nav_agent.set_target_position(player.global_position)
+				
+				destination = nav_agent.get_next_path_position()
+				local_destination = destination - global_position
+				#print(local_destination)
 	
 	if on_fire and (frame % 60) == 0:
 		get_hit(false)
@@ -122,7 +131,7 @@ func handle_death() -> void:
 		
 func handle_hitbox() -> void:
 	if animator.current_animation == "Attack":
-		if animator.current_animation_position >= 0.6 and animator.current_animation_position <= 0.7:
+		if animator.current_animation_position >= 0.53333 and animator.current_animation_position <= 0.7:
 			hitbox_collider.disabled = false
 		else:
 			hitbox_collider.disabled = true

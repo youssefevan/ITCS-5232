@@ -9,6 +9,7 @@
 radius = 0.453211
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xvjjs"]
+radius = 0.768918
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1spk1"]
 height = 0.55852
@@ -34,35 +35,38 @@ shape = SubResource("CylinderShape3D_6vg4r")
 [node name="enemy" parent="Mesh" instance=ExtResource("2_cvg5x")]
 
 [node name="Skeleton3D" parent="Mesh/enemy/Armature" index="0"]
-bones/0/position = Vector3(0.00110486, 0.744097, -0.000523235)
-bones/0/rotation = Quaternion(0.0350873, 0.0115643, -0.00464918, 0.999306)
-bones/1/rotation = Quaternion(-0.632729, -0.158105, 0.263095, -0.710941)
+bones/0/position = Vector3(0.0394594, 0.677186, 0.326576)
+bones/0/rotation = Quaternion(0.0619472, -0.446443, 0.0480556, 0.891371)
+bones/1/rotation = Quaternion(-0.181556, -0.457989, 0.786519, -0.372386)
 bones/2/rotation = Quaternion(-0.052445, -0.0828807, 0.23389, 0.967303)
-bones/3/rotation = Quaternion(0.0620791, 0.197813, 0.977149, -0.0468698)
+bones/3/rotation = Quaternion(0.67313, 0.0242839, 0.729639, -0.118044)
 bones/3/scale = Vector3(0.999998, 1, 1)
-bones/4/rotation = Quaternion(-0.469615, 1.82691e-06, 0.0596363, 0.880855)
+bones/4/rotation = Quaternion(-0.548425, 1.64891e-06, 0.0696446, 0.833295)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(0.401692, 0.417089, 0.577492, 0.575486)
+bones/5/rotation = Quaternion(-0.142011, -0.212151, 0.901258, 0.350084)
 bones/6/rotation = Quaternion(0.518907, 0.0357421, 0.0466813, 0.852807)
-bones/7/rotation = Quaternion(-0.0917936, 0.38452, 0.918155, 0.0266473)
+bones/7/rotation = Quaternion(0.210044, 0.432703, 0.875518, 0.0460276)
 bones/7/scale = Vector3(0.999998, 1, 1)
-bones/8/rotation = Quaternion(-0.423413, -1.89384e-06, -0.0537693, 0.90434)
+bones/8/rotation = Quaternion(-0.580717, -1.58593e-06, -0.0737449, 0.810759)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/position = Vector3(-0.2, 0.03, 0.182735)
 bones/9/rotation = Quaternion(-0.124154, -0.696122, 0.696122, 0.124154)
-bones/10/position = Vector3(0.2, 0.0349068, -0.136611)
+bones/10/position = Vector3(0.164407, 0.0958732, 0.093898)
 bones/10/rotation = Quaternion(0.124154, -0.696122, 0.696122, -0.124154)
+bones/11/position = Vector3(0.434756, 0.438892, 0.749805)
 bones/11/rotation = Quaternion(-0.121908, 0.696519, 0.696519, -0.121908)
 bones/11/scale = Vector3(1, 1, 1)
+bones/12/position = Vector3(-0.33156, 0.51, 0.61)
 bones/12/rotation = Quaternion(0.121908, 0.696519, 0.696519, 0.121908)
 bones/12/scale = Vector3(1, 1, 1)
 
 [node name="Hitbox" type="Area3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03716, 0.734878)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03716, 1.0716)
 collision_layer = 4
 collision_mask = 2
 
 [node name="Collider" type="CollisionShape3D" parent="Mesh/Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.184363)
 shape = SubResource("SphereShape3D_xvjjs")
 disabled = true
 

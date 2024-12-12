@@ -4,14 +4,20 @@ var speed = 30
 
 var on_fire := false
 
+var size := 1.0
+
 @onready var arrow_mesh_scene = preload("res://models/arrow.glb")
 
 func _ready():
+	$Mesh.scale = Vector3(size, size, size)
+	$Collider.scale = Vector3(size, size, size)
+	$VisibleOnScreenNotifier3D.scale = Vector3(size, size, size)
+	
 	if on_fire:
 		$Mesh.material.emission_enabled = true
 	else:
 		$Mesh.material.emission_enabled = false
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(1.5).timeout
 	call_deferred("queue_free") 
 
 func _physics_process(delta) -> void:

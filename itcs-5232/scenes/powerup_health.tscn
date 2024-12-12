@@ -14,7 +14,7 @@ type = "heal"
 visible = false
 
 [node name="Node3D" type="Node3D" parent="." index="3"]
-transform = Transform3D(-4.29825e-08, 0.334169, 0.942513, -7.94927e-09, 0.942513, -0.334169, -1, -2.18557e-08, -3.78552e-08, 0, 0.804917, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.804917, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Node3D" index="0"]
 material_override = SubResource("StandardMaterial3D_kseob")
