@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bu88s2674kdcu"]
 
 [ext_resource type="Script" path="res://scripts/arrow.gd" id="1_hrfu4"]
-[ext_resource type="Material" uid="uid://dvacplfkejf14" path="res://bullet.tres" id="2_gd8xe"]
+[ext_resource type="Material" uid="uid://dvacplfkejf14" path="res://resources/bullet.tres" id="2_gd8xe"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pjflj"]
 radius = 0.0822643

@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmvhco8a888yl"]
+[gd_scene load_steps=10 format=3 uid="uid://cmvhco8a888yl"]
 
 [ext_resource type="Script" path="res://scripts/fire.gd" id="1_4dg4a"]
+[ext_resource type="Shader" uid="uid://ct5qksvy2xbps" path="res://resources/fire_shader.tres" id="2_6st3h"]
+[ext_resource type="Texture2D" uid="uid://b3384ot6fhdrf" path="res://resources/Voronoi01.png" id="3_juxf3"]
+[ext_resource type="Texture2D" uid="uid://cuqhq080dh3us" path="res://resources/flame3.png" id="4_sr8ob"]
+[ext_resource type="Material" uid="uid://b4c25ixvxcr24" path="res://resources/fire2.tres" id="6_g50v5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfbdb"]
 transparency = 1
@@ -11,16 +15,33 @@ emission = Color(1, 0, 0, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_ci1wd"]
 radius = 0.75
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5dh4f"]
+render_priority = 0
+shader = ExtResource("2_6st3h")
+shader_parameter/DissolveTiling = Vector2(0.2, 0.15)
+shader_parameter/DissolveSpeed = Vector2(0, 0.2)
+shader_parameter/DissolveAmount = 0.729
+shader_parameter/Main = ExtResource("4_sr8ob")
+shader_parameter/Dissolve = ExtResource("3_juxf3")
+
+[sub_resource type="QuadMesh" id="QuadMesh_0drvt"]
+
 [node name="Fire" type="Area3D"]
 collision_layer = 32
 collision_mask = 4
 script = ExtResource("1_4dg4a")
 
 [node name="Model" type="CSGSphere3D" parent="."]
+visible = false
 radius = 0.75
 material = SubResource("StandardMaterial3D_qfbdb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_ci1wd")
+
+[node name="Flames2" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_5dh4f")
+process_material = ExtResource("6_g50v5")
+draw_pass_1 = SubResource("QuadMesh_0drvt")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="1_vjbhf"]
 [ext_resource type="Texture2D" uid="uid://cl7c875bqsga4" path="res://icon.svg" id="2_p1bd7"]
 [ext_resource type="PackedScene" uid="uid://1sot457caqrq" path="res://models/dirt.blend" id="3_igy82"]
-[ext_resource type="Material" uid="uid://qxoo8crj8ten" path="res://dirt.tres" id="4_u5qvd"]
+[ext_resource type="Material" uid="uid://qxoo8crj8ten" path="res://resources/dirt.tres" id="4_u5qvd"]
 
 [node name="EnemySpawner" type="Node3D" groups=["Spawner"]]
 script = ExtResource("1_vjbhf")

@@ -111,6 +111,9 @@ func _physics_process(delta) -> void:
 func get_hit(fire_arrow : bool) -> void:
 	health -= 1
 	
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("hit_flash")
+	
 	if fire_arrow == true and on_fire == false:
 		catch_fire()
 		
