@@ -3,17 +3,13 @@ extends CharacterBody3D
 var ray_origin = Vector3()
 var ray_target = Vector3()
 
-var speed = 400
-
 var input_dir : Vector3
 
-var fire_rate
-var initial_fire_rate := 0.4
-var fire_rate_exponent := 0
-var fire_rate_decay := 0.8
-var minimum_fire_rate := 0.03
 
-var fire_rounds := 0
+var speed := 400.0
+var fire_rate := 0.4
+
+var fire_round_chance := 0.0
 var ammo_size := 1.0
 
 var can_shoot := true
@@ -22,12 +18,19 @@ var base_rotation = 0
 
 @onready var arrow_scene = preload("res://scenes/arrow.tscn")
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
-	calculate_fire_rate()
+	rng.randomize()
 	$Model/player/AnimationPlayer.play("RunForward")
 
 func calculate_fire_rate():
-	fire_rate = initial_fire_rate*pow(fire_rate_decay, fire_rate_exponent) + minimum_fire_rate
+	fire_rate *= 0.9
+
+func calculate_speed():
+	speed *= 1.03
+	$SpeedLabel.visible = true
+	$SpeedLabel.text = str(speed)
 
 func _physics_process(delta):
 	handle_aim()
@@ -57,18 +60,16 @@ func handle_death():
 func handle_shooting():
 	if Input.is_action_pressed("shoot"):
 		if can_shoot:
+			$Animator.stop()
 			$Animator.play("Recoil")
 			var arrow = arrow_scene.instantiate()
 			arrow.position = $Model/Bow/Bow/ArrowPos.global_position
 			arrow.rotation.y = $Model/Bow/Bow/ArrowPos.global_rotation.y + (PI/2)
-			if fire_rounds > 0:
+			var fire_chance = rng.randf()
+			print(fire_chance)
+			if fire_chance <= fire_round_chance:
 				arrow.on_fire = true
-				fire_rounds -= 1
-				if fire_rounds > 0:
-					$FireLabel.text = str(fire_rounds)
-				else:
-					$FireLabel.visible = false
-			arrow.scale = Vector3(1, ammo_size, ammo_size)
+			arrow.scale = Vector3(ammo_size, ammo_size, ammo_size)
 			get_parent().add_child(arrow)
 			can_shoot = false
 			await get_tree().create_timer(fire_rate).timeout
@@ -97,13 +98,12 @@ func handle_aim():
 
 func collect_powerup(type : String):
 	if type == "quickfire":
-		fire_rate_exponent += 1
 		calculate_fire_rate()
 	elif type == "mushroom":
 		ammo_size += 0.2
 	elif type == "fire":
-		fire_rounds += 1
-		$FireLabel.visible = true
-		$FireLabel.text = str(fire_rounds)
+		fire_round_chance += 0.01
 	elif type == "speed":
-		speed += 50
+		calculate_speed()
+	elif type == "heal":
+		World.player_health += 1

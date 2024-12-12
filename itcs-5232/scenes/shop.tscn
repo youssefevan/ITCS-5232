@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dochigcm8dm41"]
+[gd_scene load_steps=7 format=3 uid="uid://dochigcm8dm41"]
 
 [ext_resource type="PackedScene" uid="uid://ckh8cmke4p76" path="res://models/shop.blend" id="1_28qmj"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="1_fpcd1"]
@@ -6,8 +6,49 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_514ru"]
 radius = 2.28939
 
+[sub_resource type="Animation" id="Animation_6vacr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:outline_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pc8u5"]
+resource_name = "buy"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:outline_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vytxi"]
+_data = {
+"RESET": SubResource("Animation_6vacr"),
+"buy": SubResource("Animation_pc8u5")
+}
+
 [node name="Shop" type="Node3D"]
 script = ExtResource("1_fpcd1")
+price = 250
+type = "quickfire"
+display_name = "Quickfire"
+modifier = "+1"
 
 [node name="shop" parent="." instance=ExtResource("1_28qmj")]
 
@@ -21,8 +62,16 @@ shape = SubResource("SphereShape3D_514ru")
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.14131, 0)
 billboard = 1
-text = "E"
-font_size = 128
+no_depth_test = true
+text = "Health + 5
+1000 bones"
+font_size = 96
+outline_size = 36
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vytxi")
+}
 
 [connection signal="body_entered" from="Radius" to="." method="_on_radius_body_entered"]
 [connection signal="body_exited" from="Radius" to="." method="_on_radius_body_exited"]

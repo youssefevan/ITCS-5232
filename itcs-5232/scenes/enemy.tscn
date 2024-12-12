@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dh47jhenpais1"]
+[gd_scene load_steps=8 format=3 uid="uid://dh47jhenpais1"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_mqtny"]
 [ext_resource type="PackedScene" uid="uid://cmvhco8a888yl" path="res://scenes/fire.tscn" id="2_8owd0"]
 [ext_resource type="PackedScene" uid="uid://0j3ule6bg4tt" path="res://models/enemy.blend" id="2_cvg5x"]
+[ext_resource type="PackedScene" uid="uid://3e84qyuhunn6" path="res://scenes/powerup_health.tscn" id="3_0nfof"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6vg4r"]
 radius = 0.453211
@@ -21,6 +22,8 @@ floor_max_angle = 0.872665
 floor_snap_length = 0.3
 script = ExtResource("1_mqtny")
 fire_scene = ExtResource("2_8owd0")
+bones = 2
+drops = Array[PackedScene]([ExtResource("3_0nfof")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -72,6 +75,15 @@ collision_mask = 2
 
 [node name="Collider" type="CollisionShape3D" parent="MeleeRange"]
 shape = SubResource("CylinderShape3D_1spk1")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3268, 0)
+visible = false
+billboard = 1
+font_size = 48
 
 [connection signal="animation_finished" from="Mesh/enemy/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Mesh/Hitbox" to="." method="_on_hitbox_body_entered"]

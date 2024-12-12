@@ -11,4 +11,5 @@ emission = Color(1, 0, 0, 1)
 type = "fire"
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.371031, 0)
 material_override = SubResource("StandardMaterial3D_0lbwm")

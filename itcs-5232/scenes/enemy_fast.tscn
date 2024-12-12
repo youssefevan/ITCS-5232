@@ -8,5 +8,6 @@ max_speed = 500
 attack_movement_speed = 250.0
 anim_speed_walk = 2.0
 anim_speed_attack = 2.0
+bones = 10
 
 [editable path="Mesh/enemy"]

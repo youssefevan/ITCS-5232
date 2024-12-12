@@ -1,15 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxmsfg6fgy3en"]
+[gd_scene load_steps=2 format=3 uid="uid://bxmsfg6fgy3en"]
 
 [ext_resource type="PackedScene" uid="uid://dh47jhenpais1" path="res://scenes/enemy.tscn" id="1_eh1nn"]
-[ext_resource type="PackedScene" uid="uid://dkpjywg2oeqrq" path="res://scenes/powerup_fire.tscn" id="3_ygh38"]
-[ext_resource type="PackedScene" uid="uid://k1n8y1jrnigl" path="res://scenes/powerup_quickfire.tscn" id="4_lhml8"]
-[ext_resource type="PackedScene" uid="uid://coag02vtbckbd" path="res://scenes/powerup_speed.tscn" id="5_2ofto"]
-[ext_resource type="PackedScene" uid="uid://bqlt2onccdu0m" path="res://scenes/powerup_mushroom.tscn" id="5_fmo32"]
 
 [node name="EnemySlow" instance=ExtResource("1_eh1nn")]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 max_speed = 250
-bones = 3
-drops = Array[PackedScene]([ExtResource("3_ygh38"), ExtResource("4_lhml8"), ExtResource("5_2ofto"), ExtResource("5_fmo32")])
+bones = 5
 
 [editable path="Mesh/enemy"]

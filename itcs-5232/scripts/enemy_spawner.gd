@@ -26,7 +26,7 @@ func _ready():
 func _physics_process(delta):
 	frame += 1
 	
-	if (frame % (40 * 1)) == 0 and spawn_amount > 0 and start_wave == true:
+	if (frame % (120 * 1)) == 0 and spawn_amount > 0 and start_wave == true:
 		if location_index < len(locations)-1:
 			location_index += 1
 		else:

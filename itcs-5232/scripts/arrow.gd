@@ -7,10 +7,14 @@ var on_fire := false
 @onready var arrow_mesh_scene = preload("res://models/arrow.glb")
 
 func _ready():
+	if on_fire:
+		$Mesh.material.emission_enabled = true
+	else:
+		$Mesh.material.emission_enabled = false
 	await get_tree().create_timer(5).timeout
 	call_deferred("queue_free") 
 
-func _process(delta):
+func _physics_process(delta) -> void:
 	position += transform.basis * Vector3(speed, 0, 0) * delta
 
 func _on_body_entered(body):

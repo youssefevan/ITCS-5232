@@ -114,7 +114,7 @@ transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 
 projection = 1
 size = 20.0
 
-[node name="FireLabel" type="Label3D" parent="."]
+[node name="SpeedLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45874, 0)
 visible = false
 billboard = 1
