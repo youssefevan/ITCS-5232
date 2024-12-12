@@ -5,7 +5,6 @@ var ray_target = Vector3()
 
 var input_dir : Vector3
 
-
 var speed := 400.0
 var fire_rate := 0.4
 

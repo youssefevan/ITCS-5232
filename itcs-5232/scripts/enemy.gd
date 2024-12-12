@@ -17,7 +17,6 @@ var player_in_range := false
 @export var anim_speed_attack = 1.2
 
 @export var health := 2
-
 @export var bones := 1
 
 @export var drops : Array[PackedScene]
@@ -33,11 +32,11 @@ var look_friction = 5
 
 var rng = RandomNumberGenerator.new()
 
-var on_fire := false
-
 var player_distance : float
 
+var on_fire := false
 var spawning := true
+var dead := false
 
 func _ready() -> void:
 	speed = max_speed
@@ -99,25 +98,33 @@ func _physics_process(delta) -> void:
 	
 	look_angle = lerp_angle(look_angle, Vector2(direction.x, direction.z).angle(), look_friction * delta)
 	
-	mesh.rotation.y = -look_angle + (PI/2)
+	if !dead:
+		mesh.rotation.y = -look_angle + (PI/2)
 	
 	velocity = direction * speed * delta
 	position.y = 0
 	
 	handle_hitbox()
-	handle_death()
 	
 	move_and_slide()
 
 func get_hit(fire_arrow : bool) -> void:
 	health -= 1
+	
 	if fire_arrow == true and on_fire == false:
 		catch_fire()
+		
+	if health <= 0:
+		handle_death()
 
 func handle_death() -> void:
 	if health <= 0:
-		World.bones += bones
-		World.enemies_left -= 1
+		speed = 0
+		
+		dead = true
+		$Mesh/enemy/AnimationPlayer.play("Die")
+		$CollisionShape3D.disabled = true
+		$MeleeRange/Collider.disabled = true
 		
 		if len(drops) > 0:
 			var drop_chance = rng.randi_range(0, 99)
@@ -127,6 +134,10 @@ func handle_death() -> void:
 				get_parent().add_child(drop)
 				drop.global_position = global_position
 		
+		World.bones += bones
+		World.enemies_left -= 1
+		
+		await $Mesh/enemy/AnimationPlayer.animation_finished
 		call_deferred("queue_free")
 		
 func handle_hitbox() -> void:
