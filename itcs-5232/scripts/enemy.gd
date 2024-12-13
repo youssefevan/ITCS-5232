@@ -125,6 +125,9 @@ func get_hit(fire_arrow : bool) -> void:
 
 func handle_death() -> void:
 	if health <= 0:
+		World.bones += bones
+		World.enemies_left -= 1
+		
 		speed = 0
 		
 		$HitSFX2.pitch_scale = rng.randf_range(0.8, 1.2)
@@ -142,9 +145,6 @@ func handle_death() -> void:
 				var drop = drops[pick_drop].instantiate()
 				get_parent().add_child(drop)
 				drop.global_position = global_position
-		
-		World.bones += bones
-		World.enemies_left -= 1
 		
 		await $Mesh/enemy/AnimationPlayer.animation_finished
 		call_deferred("queue_free")

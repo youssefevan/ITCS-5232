@@ -9,6 +9,7 @@ func _ready():
 
 func new_wave():
 	World.wave += 1
+	World.enemies_left = 0
 	for spawner in spawners:
 		spawner.start_wave = false
 		if spawner.unlock_wave <= World.wave:
@@ -21,7 +22,7 @@ func new_wave():
 		spawner.start_wave = true
 
 func _physics_process(delta):
-	if World.enemies_left == 0:
+	if World.enemies_left <= 0:
 		new_wave()
 
 func player_died():
