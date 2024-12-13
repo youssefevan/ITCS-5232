@@ -159,7 +159,7 @@ func get_hit():
 			$Model/player/AnimationPlayer.play("Die")
 			$Model/Bow.visible = false
 			
-			speed = 0
+			velocity = Vector3.ZERO
 			
 			await get_tree().create_timer(1).timeout
 			
