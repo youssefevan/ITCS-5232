@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4e2ho0fnmaib"]
+[gd_scene load_steps=10 format=3 uid="uid://b4e2ho0fnmaib"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nu5ra"]
 [ext_resource type="PackedScene" uid="uid://fbdihai0segm" path="res://models/player.blend" id="2_tlsqd"]
 [ext_resource type="PackedScene" uid="uid://cka7q4e2p2qtu" path="res://models/bow.glb" id="3_offc5"]
+[ext_resource type="Script" path="res://scripts/playerIK.gd" id="3_w2bkn"]
 
 [sub_resource type="Animation" id="Animation_y0gk4"]
 length = 0.001
@@ -42,6 +43,9 @@ _data = {
 "Recoil": SubResource("Animation_ta56a")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bl0x0"]
+albedo_color = Color(0.925353, 0.925353, 0.925353, 1)
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_68y0l"]
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
@@ -64,30 +68,52 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.35, 0)
 
 [node name="Skeleton3D" parent="Model/player/Armature" index="0"]
-bones/1/rotation = Quaternion(1.0878e-07, 6.27174e-08, 0.866324, -0.499482)
-bones/3/rotation = Quaternion(-0.00225165, 0.0128643, 0.984942, -0.172389)
+bones/0/position = Vector3(0, 0.686652, 0)
+bones/0/rotation = Quaternion(0.130157, 0, -2.89006e-17, 0.991493)
+bones/1/rotation = Quaternion(0.0556345, 0.566858, 0.819851, -0.0584881)
+bones/1/scale = Vector3(0.999998, 1, 1)
+bones/2/rotation = Quaternion(-0.40182, 1.89873e-06, 0.0510274, 0.914296)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(-0.0796562, 0.238946, 0.964953, 0.0736534)
 bones/3/scale = Vector3(0.999998, 1, 1)
-bones/4/rotation = Quaternion(-0.0254015, 2.21736e-06, 0.00322575, 0.999672)
+bones/4/rotation = Quaternion(-0.509001, -1.70537e-06, -0.0646384, 0.858336)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(-1.0878e-07, 6.27174e-08, 0.866324, 0.499482)
-bones/7/rotation = Quaternion(0.00225165, 0.0128643, 0.984942, 0.172389)
-bones/7/scale = Vector3(0.999998, 1, 1)
-bones/8/rotation = Quaternion(-0.0254015, -2.21736e-06, -0.00322575, 0.999672)
-bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(-0.124154, -0.696122, 0.696122, 0.124154)
-bones/10/rotation = Quaternion(0.124154, -0.696122, 0.696122, -0.124154)
-bones/11/rotation = Quaternion(-0.121908, 0.696519, 0.696519, -0.121908)
-bones/11/scale = Vector3(1, 1, 1)
-bones/12/rotation = Quaternion(0.121908, 0.696519, 0.696519, 0.121908)
+bones/6/rotation = Quaternion(-0.494914, 0.352706, 0.584077, -0.538064)
+bones/7/rotation = Quaternion(0.336763, 0.169823, 0.29226, 0.878826)
+bones/8/rotation = Quaternion(0.18086, 0.306319, 0.733627, 0.579008)
+bones/9/rotation = Quaternion(0.64761, 0.225223, 0.406242, 0.604023)
+bones/10/position = Vector3(-0.235499, 0.03, -0.236776)
+bones/10/rotation = Quaternion(-0.124154, -0.696122, 0.696122, 0.124154)
+bones/11/position = Vector3(0.264026, 0.0403711, 0.338789)
+bones/11/rotation = Quaternion(0.124154, -0.696122, 0.696122, -0.124154)
+bones/12/rotation = Quaternion(-0.121908, 0.696519, 0.696519, -0.121908)
 bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(0.121908, 0.696519, 0.696519, 0.121908)
+bones/13/scale = Vector3(1, 1, 1)
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="Model/player/Armature/Skeleton3D" index="1"]
+root_bone = &"Root"
+tip_bone = &"UpperRoon"
+override_tip_basis = false
+target_node = NodePath("../../../../../Target")
+script = ExtResource("3_w2bkn")
 
 [node name="Bow" type="Node3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3141, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4756, 0)
 
 [node name="Bow" parent="Model/Bow" instance=ExtResource("3_offc5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 
+[node name="Cube" parent="Model/Bow/Bow" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_bl0x0")
+
 [node name="ArrowPos" type="Node3D" parent="Model/Bow/Bow"]
+
+[node name="TargetRight" type="Node3D" parent="Model/Bow"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.295249, 0.00185037, -0.103559)
+
+[node name="TargetLeft" type="Node3D" parent="Model/Bow"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.412066, -0.111369, -0.701625)
 
 [node name="Wheels" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -120,4 +146,8 @@ visible = false
 billboard = 1
 font_size = 64
 
+[node name="Target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
 [editable path="Model/player"]
+[editable path="Model/Bow/Bow"]

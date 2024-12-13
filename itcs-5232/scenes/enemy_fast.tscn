@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3fthf4hgp2kt"]
+[gd_scene load_steps=3 format=3 uid="uid://b3fthf4hgp2kt"]
 
 [ext_resource type="PackedScene" uid="uid://dh47jhenpais1" path="res://scenes/enemy.tscn" id="1_3yqdo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q334i"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
 
 [node name="EnemyFast" instance=ExtResource("1_3yqdo")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
@@ -9,5 +15,8 @@ attack_movement_speed = 250.0
 anim_speed_walk = 2.0
 anim_speed_attack = 2.0
 bones = 10
+
+[node name="Icosphere" parent="Mesh/enemy/Armature/Skeleton3D" index="0"]
+material_overlay = SubResource("StandardMaterial3D_q334i")
 
 [editable path="Mesh/enemy"]

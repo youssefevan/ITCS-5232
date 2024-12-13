@@ -4,6 +4,7 @@ var ray_origin = Vector3()
 var ray_target = Vector3()
 
 var input_dir : Vector3
+var look_to
 
 var speed := 400.0
 var fire_rate := 0.4
@@ -13,7 +14,11 @@ var ammo_size := 1.0
 
 var can_shoot := true
 
-var base_rotation = 0
+var base_rotation := 0.0
+var look_vector
+var input_vector := Vector2(0, -1)
+
+var model_relative_rotation = 0
 
 @onready var arrow_scene = preload("res://scenes/arrow.tscn")
 
@@ -40,14 +45,30 @@ func _physics_process(delta):
 	input_dir.y = 0
 	
 	input_dir = input_dir.normalized()
-	base_rotation
 	
 	if input_dir != Vector3.ZERO:
-		base_rotation = -Vector2(input_dir.x, input_dir.z).angle() + (PI/2)
-		
-	#$Model/Wheels.rotation.y = lerp_angle($Model/Wheels.rotation.y, base_rotation, 15 * delta)
+		base_rotation = -Vector2(input_dir.x, input_dir.z).angle() + PI/2
+	
+	
+	
+	if base_rotation < 0:
+		model_relative_rotation = base_rotation + 2*PI
+	else:
+		model_relative_rotation = base_rotation
 	
 	velocity = lerp(velocity, speed * input_dir * delta, 10 * delta)
+	
+	if input_dir != Vector3.ZERO:
+		if abs(angle_difference($Target.rotation.y, model_relative_rotation)) > PI/2:
+			$Model/player/AnimationPlayer.play("RunBack")
+			$Model/player.rotation.y = lerp_angle($Model/player.rotation.y, model_relative_rotation - PI, 15 * delta)
+		else:
+			$Model/player/AnimationPlayer.play("RunForward")
+			$Model/player.rotation.y = lerp_angle($Model/player.rotation.y, model_relative_rotation, 15 * delta)
+	else:
+		$Model/player/AnimationPlayer.play("Idle")
+		$Model/player.rotation.y = lerp_angle($Model/player.rotation.y, $Target.rotation.y, 15 * delta)
+	
 	
 	handle_death()
 	move_and_slide()
@@ -86,13 +107,17 @@ func handle_aim():
 	
 	if not intersection.is_empty():
 		var pos = intersection.position
-		var look_to = Vector3(pos.x, position.y, pos.z)
+		look_to = Vector3(pos.x, position.y, pos.z)
 		
-		$Model.look_at(look_to, Vector3.UP)
+		$Target.look_at(look_to, Vector3.UP)
+		$Model/Bow.look_at(look_to, Vector3.UP)
 		
 		# lock x and z axis
-		$Model.rotation.x = 0
-		$Model.rotation.z = 0
+		$Target.rotation.y += PI
+		$Target.rotation.x = 0
+		$Target.rotation.z = 0
+		$Model/Bow.rotation.x = 0
+		$Model/Bow.rotation.z = 0
 
 func collect_powerup(type : String):
 	if type == "quickfire":
