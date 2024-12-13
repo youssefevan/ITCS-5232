@@ -91,5 +91,17 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Exit"
 
+[node name="Label" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 448.0
+offset_right = 280.0
+offset_bottom = 624.0
+text = "Controls:
+WASD - move
+Mouse - aim
+M1 - shoot
+E - buy
+Esc - pause"
+
 [connection signal="pressed" from="GUI/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="GUI/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
