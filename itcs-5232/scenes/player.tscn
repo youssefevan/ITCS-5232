@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4e2ho0fnmaib"]
+[gd_scene load_steps=15 format=3 uid="uid://b4e2ho0fnmaib"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nu5ra"]
 [ext_resource type="PackedScene" uid="uid://fbdihai0segm" path="res://models/player.blend" id="2_tlsqd"]
 [ext_resource type="PackedScene" uid="uid://cka7q4e2p2qtu" path="res://models/bow.glb" id="3_offc5"]
-[ext_resource type="Script" path="res://scripts/playerIK.gd" id="3_w2bkn"]
+[ext_resource type="AudioStream" uid="uid://d3buci4v5bxig" path="res://sounds/gunshot.ogg" id="4_nqu68"]
+[ext_resource type="AudioStream" uid="uid://b5bdtep32wtq0" path="res://sounds/player_hit.ogg" id="5_bmb62"]
 
 [sub_resource type="Animation" id="Animation_y0gk4"]
 length = 0.001
@@ -43,6 +44,49 @@ _data = {
 "Recoil": SubResource("Animation_ta56a")
 }
 
+[sub_resource type="Animation" id="Animation_p4bpw"]
+resource_name = "hit_flash"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/player/Armature/Skeleton3D/Icosphere:material_overlay:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cmgd8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/player/Armature/Skeleton3D/Icosphere:material_overlay:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ptoh8"]
+_data = {
+"RESET": SubResource("Animation_cmgd8"),
+"hit_flash": SubResource("Animation_p4bpw")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itja2"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bl0x0"]
 albedo_color = Color(0.925353, 0.925353, 0.925353, 1)
 
@@ -61,6 +105,11 @@ libraries = {
 "": SubResource("AnimationLibrary_o7bf6")
 }
 
+[node name="FXAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ptoh8")
+}
+
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
@@ -69,20 +118,20 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.3
 
 [node name="Skeleton3D" parent="Model/player/Armature" index="0"]
 bones/0/position = Vector3(0, 0.686652, 0)
-bones/0/rotation = Quaternion(0.130157, 0, -2.89006e-17, 0.991493)
-bones/1/rotation = Quaternion(0.0556345, 0.566858, 0.819851, -0.0584881)
+bones/0/rotation = Quaternion(0.100442, -4.15693e-25, -2.90142e-17, 0.994943)
+bones/1/rotation = Quaternion(0.0538928, 0.54293, 0.835883, -0.0601859)
 bones/1/scale = Vector3(0.999998, 1, 1)
-bones/2/rotation = Quaternion(-0.40182, 1.89873e-06, 0.0510274, 0.914296)
+bones/2/rotation = Quaternion(-0.405187, 1.92027e-06, 0.051455, 0.912785)
 bones/2/scale = Vector3(1, 1, 1)
-bones/3/rotation = Quaternion(-0.0796562, 0.238946, 0.964953, 0.0736534)
+bones/3/rotation = Quaternion(-0.0884195, 0.107786, 0.986764, 0.0828252)
 bones/3/scale = Vector3(0.999998, 1, 1)
-bones/4/rotation = Quaternion(-0.509001, -1.70537e-06, -0.0646384, 0.858336)
+bones/4/rotation = Quaternion(-0.430376, -1.89687e-06, -0.0546538, 0.900994)
 bones/4/scale = Vector3(1, 1, 1)
-bones/6/rotation = Quaternion(-0.494914, 0.352706, 0.584077, -0.538064)
+bones/6/rotation = Quaternion(-0.454691, 0.331665, 0.621033, -0.545503)
 bones/7/rotation = Quaternion(0.336763, 0.169823, 0.29226, 0.878826)
-bones/8/rotation = Quaternion(0.18086, 0.306319, 0.733627, 0.579008)
-bones/9/rotation = Quaternion(0.64761, 0.225223, 0.406242, 0.604023)
-bones/10/position = Vector3(-0.235499, 0.03, -0.236776)
+bones/8/rotation = Quaternion(0.188641, 0.274104, 0.723447, 0.604901)
+bones/9/rotation = Quaternion(0.647609, 0.225223, 0.406242, 0.604023)
+bones/10/position = Vector3(-0.235499, 0.03, -0.321473)
 bones/10/rotation = Quaternion(-0.124154, -0.696122, 0.696122, 0.124154)
 bones/11/position = Vector3(0.264026, 0.0403711, 0.338789)
 bones/11/rotation = Quaternion(0.124154, -0.696122, 0.696122, -0.124154)
@@ -91,12 +140,14 @@ bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(0.121908, 0.696519, 0.696519, 0.121908)
 bones/13/scale = Vector3(1, 1, 1)
 
+[node name="Icosphere" parent="Model/player/Armature/Skeleton3D" index="0"]
+material_overlay = SubResource("StandardMaterial3D_itja2")
+
 [node name="SkeletonIK3D" type="SkeletonIK3D" parent="Model/player/Armature/Skeleton3D" index="1"]
 root_bone = &"Root"
 tip_bone = &"UpperRoon"
 override_tip_basis = false
 target_node = NodePath("../../../../../Target")
-script = ExtResource("3_w2bkn")
 
 [node name="Bow" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4756, 0)
@@ -105,6 +156,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4756, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 
 [node name="Cube" parent="Model/Bow/Bow" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0619493, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_bl0x0")
 
 [node name="ArrowPos" type="Node3D" parent="Model/Bow/Bow"]
@@ -114,6 +166,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.2952
 
 [node name="TargetLeft" type="Node3D" parent="Model/Bow"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.412066, -0.111369, -0.701625)
+
+[node name="GunAudio" type="AudioStreamPlayer3D" parent="Model/Bow"]
+stream = ExtResource("4_nqu68")
 
 [node name="Wheels" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -148,6 +203,10 @@ font_size = 64
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="HitSFX" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2256, 0)
+stream = ExtResource("5_bmb62")
 
 [editable path="Model/player"]
 [editable path="Model/Bow/Bow"]

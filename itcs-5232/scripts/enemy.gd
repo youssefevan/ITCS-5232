@@ -62,7 +62,7 @@ func _physics_process(delta) -> void:
 		player = get_tree().get_first_node_in_group("Player")
 	
 	if !spawning:
-		if (frame % 12) == 0: 
+		if (frame % 12) == 0:
 			player_distance = Vector2(global_position.x, global_position.z).distance_to(Vector2(player.global_position.x, player.global_position.z))
 			$Label3D.text = str(int(player_distance))
 		
@@ -114,6 +114,9 @@ func get_hit(fire_arrow : bool) -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit_flash")
 	
+	$HitSFX.pitch_scale = rng.randf_range(0.8, 1.2)
+	$HitSFX.play()
+	
 	if fire_arrow == true and on_fire == false:
 		catch_fire()
 		
@@ -123,6 +126,9 @@ func get_hit(fire_arrow : bool) -> void:
 func handle_death() -> void:
 	if health <= 0:
 		speed = 0
+		
+		$HitSFX2.pitch_scale = rng.randf_range(0.8, 1.2)
+		$HitSFX2.play()
 		
 		dead = true
 		$Mesh/enemy/AnimationPlayer.play("Die")
@@ -162,7 +168,10 @@ func _on_melee_range_body_entered(body) -> void:
 		player_in_range = true
 		speed = attack_movement_speed
 		animator.speed_scale = anim_speed_attack
+		
 		animator.play("Attack")
+		$HitSFX3.pitch_scale = rng.randf_range(0.8, 1.2)
+		$HitSFX3.play()
 
 func _on_melee_range_body_exited(body) -> void:
 	if body.get_collision_layer_value(2):
@@ -178,7 +187,9 @@ func _on_animation_player_animation_finished(anim_name) -> void:
 			speed = attack_movement_speed
 			animator.speed_scale = anim_speed_attack
 			animator.play("Attack")
+			$HitSFX3.pitch_scale = rng.randf_range(0.8, 1.2)
+			$HitSFX3.play()
 
 func _on_hitbox_body_entered(body) -> void:
 	if body.get_collision_layer_value(2):
-		World.player_health -= 1
+		body.get_hit()

@@ -33,6 +33,8 @@ func _input(event):
 			buy()
 
 func buy():
+	$BuySFX.play()
+	
 	player.collect_powerup(type)
 	World.bones -= price
 	$AnimationPlayer.stop(false)

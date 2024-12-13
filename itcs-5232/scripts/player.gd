@@ -24,9 +24,20 @@ var model_relative_rotation = 0
 
 var rng = RandomNumberGenerator.new()
 
+var rand_shake := 0.2
+var shake_strength := 0.0
+var shake_fade := 10.0
+
 func _ready():
 	rng.randomize()
 	$Model/player/AnimationPlayer.play("RunForward")
+	$Model/player/Armature/Skeleton3D/SkeletonIK3D.start()
+
+func apply_shake():
+	shake_strength = rand_shake
+
+func random_offset():
+	return Vector2(rng.randf_range(-shake_strength, shake_strength), rng.randf_range(-shake_strength, shake_strength))
 
 func calculate_fire_rate():
 	fire_rate *= 0.85
@@ -37,45 +48,44 @@ func calculate_speed():
 	$SpeedLabel.text = str(speed)
 
 func _physics_process(delta):
-	handle_aim()
-	handle_shooting()
-	
-	input_dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	input_dir.z = Input.get_action_strength("down") - Input.get_action_strength("up")
-	input_dir.y = 0
-	
-	input_dir = input_dir.normalized()
-	
-	if input_dir != Vector3.ZERO:
-		base_rotation = -Vector2(input_dir.x, input_dir.z).angle() + PI/2
-	
-	
-	
-	if base_rotation < 0:
-		model_relative_rotation = base_rotation + 2*PI
-	else:
-		model_relative_rotation = base_rotation
-	
-	velocity = lerp(velocity, speed * input_dir * delta, 10 * delta)
-	
-	if input_dir != Vector3.ZERO:
-		if abs(angle_difference($Target.rotation.y, model_relative_rotation)) > PI/2:
-			$Model/player/AnimationPlayer.play("RunBack")
-			$Model/player.rotation.y = lerp_angle($Model/player.rotation.y, model_relative_rotation - PI, 15 * delta)
+	if World.player_health > 0:
+		handle_aim()
+		handle_shooting()
+		
+		input_dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
+		input_dir.z = Input.get_action_strength("down") - Input.get_action_strength("up")
+		input_dir.y = 0
+		
+		input_dir = input_dir.normalized()
+		
+		if input_dir != Vector3.ZERO:
+			base_rotation = -Vector2(input_dir.x, input_dir.z).angle() + PI/2
+		
+		if base_rotation < 0:
+			model_relative_rotation = base_rotation + 2*PI
 		else:
-			$Model/player/AnimationPlayer.play("RunForward")
-			$Model/player.rotation.y = lerp_angle($Model/player.rotation.y, model_relative_rotation, 15 * delta)
-	else:
-		$Model/player/AnimationPlayer.play("Idle")
-		$Model/player.rotation.y = lerp_angle($Model/player.rotation.y, $Target.rotation.y, 15 * delta)
+			model_relative_rotation = base_rotation
+		
+		velocity = lerp(velocity, speed * input_dir * delta, 10 * delta)
+		
+		if input_dir != Vector3.ZERO:
+			if abs(angle_difference($Target.rotation.y, model_relative_rotation)) > PI/2:
+				$Model/player/AnimationPlayer.play("RunBack")
+				$Model/player.rotation.y = lerp_angle($Model/player.rotation.y, model_relative_rotation - PI, 15 * delta)
+			else:
+				$Model/player/AnimationPlayer.play("RunForward")
+				$Model/player.rotation.y = lerp_angle($Model/player.rotation.y, model_relative_rotation, 15 * delta)
+		else:
+			$Model/player/AnimationPlayer.play("Idle")
+			$Model/player.rotation.y = lerp_angle($Model/player.rotation.y, $Target.rotation.y, 15 * delta)
+		
+		if shake_strength > 0.0:
+			shake_strength = lerpf(shake_strength, 0.0, shake_fade * delta)
+			
+			$Camera.h_offset = random_offset().x
+			$Camera.v_offset = random_offset().y
 	
-	
-	handle_death()
 	move_and_slide()
-
-func handle_death():
-	if World.player_health <= 0:
-		pass
 
 func handle_shooting():
 	if Input.is_action_pressed("shoot"):
@@ -90,6 +100,10 @@ func handle_shooting():
 				arrow.on_fire = true
 			arrow.size = ammo_size
 			get_parent().add_child(arrow)
+			
+			$Model/Bow/GunAudio.pitch_scale = randf_range(0.8, 1.2)
+			$Model/Bow/GunAudio.play()
+			
 			can_shoot = false
 			await get_tree().create_timer(fire_rate).timeout
 			can_shoot = true
@@ -130,3 +144,25 @@ func collect_powerup(type : String):
 		calculate_speed()
 	elif type == "heal":
 		World.player_health += 1
+
+func get_hit():
+	if World.player_health > 0:
+		World.player_health -= 1
+		
+		$FXAnim.stop()
+		$FXAnim.play("hit_flash")
+		apply_shake()
+		
+		$HitSFX.pitch_scale = randf_range(0.8, 1.2)
+		$HitSFX.play()
+		
+		if World.player_health <= 0:
+			$Model/player/Armature/Skeleton3D/SkeletonIK3D.stop()
+			$Model/player/AnimationPlayer.play("Die")
+			$Model/Bow.visible = false
+			
+			speed = 0
+			
+			await get_tree().create_timer(1).timeout
+			
+			get_tree().get_first_node_in_group("Manager").player_died()

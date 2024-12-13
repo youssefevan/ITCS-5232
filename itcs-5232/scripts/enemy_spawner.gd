@@ -45,7 +45,7 @@ func _physics_process(delta):
 
 func spawn_enemy():
 	var enemy = enemy_scene.instantiate()
-	get_tree().get_root().add_child(enemy)
+	get_parent().add_child(enemy)
 	enemy.global_position = locations[location_index].global_position
 
 func spawn_enemy_slow():

@@ -64,7 +64,7 @@ layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 256.0
 theme_override_font_sizes/font_size = 64
-text = "Video Game"
+text = "Dead of Night"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -74,9 +74,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 448.0
-offset_top = 384.0
+offset_top = 425.0
 offset_right = 664.0
-offset_bottom = 504.0
+offset_bottom = 463.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -86,14 +86,10 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Play"
 
-[node name="Button2" type="Button" parent="GUI/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Options"
-
-[node name="Button3" type="Button" parent="GUI/VBoxContainer"]
+[node name="Exit" type="Button" parent="GUI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Exit"
 
 [connection signal="pressed" from="GUI/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="GUI/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

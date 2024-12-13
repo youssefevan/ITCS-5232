@@ -1,7 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dochigcm8dm41"]
+[gd_scene load_steps=9 format=3 uid="uid://dochigcm8dm41"]
 
 [ext_resource type="PackedScene" uid="uid://ckh8cmke4p76" path="res://models/shop.blend" id="1_28qmj"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="1_fpcd1"]
+[ext_resource type="AudioStream" uid="uid://8y0866s05lry" path="res://sounds/buy.ogg" id="3_x61b8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v46it"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.658824, 0, 0.231373)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_514ru"]
 radius = 2.28939
@@ -52,6 +58,9 @@ modifier = "+1"
 
 [node name="shop" parent="." instance=ExtResource("1_28qmj")]
 
+[node name="Cube" parent="shop" index="0"]
+material_overlay = SubResource("StandardMaterial3D_v46it")
+
 [node name="Radius" type="Area3D" parent="."]
 collision_mask = 2
 
@@ -73,5 +82,10 @@ libraries = {
 "": SubResource("AnimationLibrary_vytxi")
 }
 
+[node name="BuySFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_x61b8")
+
 [connection signal="body_entered" from="Radius" to="." method="_on_radius_body_entered"]
 [connection signal="body_exited" from="Radius" to="." method="_on_radius_body_exited"]
+
+[editable path="shop"]

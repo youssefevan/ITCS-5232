@@ -23,3 +23,6 @@ func new_wave():
 func _physics_process(delta):
 	if World.enemies_left == 0:
 		new_wave()
+
+func player_died():
+	$"../GUI/Pause".visible = true

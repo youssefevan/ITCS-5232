@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://0j3ule6bg4tt" path="res://models/enemy.blend" id="2_cvg5x"]
 [ext_resource type="PackedScene" uid="uid://3e84qyuhunn6" path="res://scenes/powerup_health.tscn" id="3_0nfof"]
 [ext_resource type="AudioStream" uid="uid://dfsnme33ldiay" path="res://sounds/zombie_deadogg.ogg" id="5_f7nmc"]
-[ext_resource type="AudioStream" uid="uid://bfv7qahg4qrin" path="res://sounds/fall.ogg" id="5_pm8p4"]
+[ext_resource type="AudioStream" uid="uid://b5bdtep32wtq0" path="res://sounds/player_hit.ogg" id="6_obuxe"]
 
 [sub_resource type="Animation" id="Animation_hooag"]
 resource_name = "hit_flash"
@@ -142,13 +142,10 @@ billboard = 1
 font_size = 48
 
 [node name="HitSFX" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_pm8p4")
+stream = ExtResource("5_f7nmc")
 
 [node name="HitSFX2" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_f7nmc")
-
-[node name="HitSFX3" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_f7nmc")
+stream = ExtResource("6_obuxe")
 
 [connection signal="animation_finished" from="Mesh/enemy/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Mesh/Hitbox" to="." method="_on_hitbox_body_entered"]
