@@ -44,8 +44,6 @@ func calculate_fire_rate():
 
 func calculate_speed():
 	speed *= 1.025
-	$SpeedLabel.visible = true
-	$SpeedLabel.text = str(speed)
 
 func _physics_process(delta):
 	if World.player_health > 0:
